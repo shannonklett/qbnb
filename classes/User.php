@@ -57,7 +57,7 @@ class User {
 	// constructors
 
 	private function __construct($isAdmin, $firstName, $lastName, $email, $phoneNumber, $gradYear, $facultyID, $degreeTypeID, $gender) {
-		$this->isAdmin = $isAdmin ? 1 : 0;
+		$this->isAdmin = $isAdmin;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
 		$this->email = $email;
@@ -73,6 +73,7 @@ class User {
 	 */
 	public static function current() {
 		if (is_null(self::$currentUser)) {
+			// TODO make sure this is a real variable
 			if (isset($_SESSION['user_id'])) {
 				self::$currentUser = self::withID($_SESSION['user_id']);
 			}
