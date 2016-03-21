@@ -4,6 +4,9 @@ class Booking {
 
 	private static $statusTypes;
 
+	/**
+	 * @return string[]
+	 */
 	public static function getStatusTypes() {
 		if (is_null(self::$statusTypes)) {
 			self::$statusTypes = [];
@@ -44,6 +47,11 @@ class Booking {
 		return $temp;
 	}
 
+	/**
+	 * @param int $id
+	 *
+	 * @return Booking
+	 */
 	public static function withID($id) {
 		if (!Validate::int($id)) {
 			throw new InvalidArgumentException("Booking::withID expected integer ID, got " . gettype($id) . " instead.");
@@ -63,6 +71,12 @@ class Booking {
 		}
 	}
 
+	/**
+	 * @param int $consumerID
+	 *
+	 * @return Booking[]
+	 * @throws ErrorException
+	 */
 	public static function getAllForConsumer($consumerID) {
 		if (!Validate::int($consumerID)) {
 			throw new InvalidArgumentException("Booking::getAllForConsumer expected integer consumer ID, got " . gettype($consumerID) . " instead.");
@@ -86,6 +100,12 @@ class Booking {
 		}
 	}
 
+	/**
+	 * @param int $propertyID
+	 *
+	 * @return Booking[]
+	 * @throws ErrorException
+	 */
 	public static function getAllForProperty($propertyID) {
 		if (!Validate::int($propertyID)) {
 			throw new InvalidArgumentException("Booking::getAllForProperty expected integer property ID, got " . gettype($propertyID) . " instead.");
@@ -109,6 +129,10 @@ class Booking {
 		}
 	}
 
+	/**
+	 * @return Booking[]
+	 * @throws ErrorException
+	 */
 	public static function getAll() {
 		try {
 			$pdo  = DB::getHandle();
@@ -129,58 +153,144 @@ class Booking {
 
 	// updaters
 
+	/**
+	 * @return bool
+	 */
 	public function insert() {
-		// TODO
+		if ($this->id) {
+			throw new BadMethodCallException("Attempt to insert existing record.");
+		}
+		$start = $this->startDate->format(Format::MYSQL_DATE_FORMAT);
+		$end = $this->endDate->format(Format::MYSQL_DATE_FORMAT);
+		try {
+			$pdo = DB::getHandle();
+			$stmt = $pdo->prepare("INSERT INTO bookings (id, consumer_id, property_id, start_date, end_date, status_id) VALUES (NULL, :consumer_id, :property_id, :start_date, :end_date, :status_id)");
+			$stmt->bindParam(":consumer_id", $this->consumerID);
+			$stmt->bindParam(":property_id", $this->propertyID);
+			$stmt->bindParam(":start_date", $start);
+			$stmt->bindParam(":end_date", $end);
+			$stmt->bindParam(":status_id", $this->statusID);
+			$stmt->execute();
+			$this->id = $pdo->lastInsertId();
+			return true;
+		} catch (PDOException $e) {
+			return false;
+		}
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function update() {
-		// TODO
+		if (!$this->id) {
+			throw new BadMethodCallException("Attempt to update nonexistent record.");
+		}
+		$start = $this->startDate->format(Format::MYSQL_DATE_FORMAT);
+		$end = $this->endDate->format(Format::MYSQL_DATE_FORMAT);
+		try {
+			$pdo = DB::getHandle();
+			$stmt = $pdo->prepare("UPDATE bookings SET consumer_id = :consumer_id, property_id = :property_id, start_date = :start_date, end_date = :end_date, status_id = :status_id WHERE id = :id");
+			$stmt->bindParam(":consumer_id", $this->consumerID);
+			$stmt->bindParam(":property_id", $this->propertyID);
+			$stmt->bindParam(":start_date", $start);
+			$stmt->bindParam(":end_date", $end);
+			$stmt->bindParam(":status_id", $this->statusID);
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+			return true;
+		} catch (PDOException $e) {
+			return false;
+		}
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function delete() {
-		// TODO
+		if (!$this->id) {
+			throw new BadMethodCallException("Attempt to delete nonexistent record.");
+		}
+		try {
+			$pdo = DB::getHandle();
+			$stmt = $pdo->prepare("DELETE FROM bookings WHERE id = :id");
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+			return true;
+		} catch (PDOException $e) {
+			return false;
+		}
 	}
 
 	// getters
 
+	/**
+	 * @return int
+	 */
 	public function getID() {
 		return $this->id;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getConsumerID() {
 		return $this->consumerID;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function getConsumer() {
 		return User::withID($this->consumerID);
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getRentalPropertyID() {
 		return $this->propertyID;
 	}
 
+	/**
+	 * @return RentalProperty
+	 */
 	public function getRentalProperty() {
 		return RentalProperty::withID($this->propertyID);
 	}
 
+	/**
+	 * @return DateTime
+	 */
 	public function getStartDate() {
 		return clone $this->startDate;
 	}
 
+	/**
+	 * @return DateTime
+	 */
 	public function getEndDate() {
 		return clone $this->endDate;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getStatusID() {
 		return $this->statusID;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getStatus() {
 		return self::getStatusTypes()[$this->statusID];
 	}
 
 	// setters
 
+	/**
+	 * @param int $id
+	 */
 	private function setID($id) {
 		if (!Validate::int($id)) {
 			throw new InvalidArgumentException("setID expected integer ID, got " . gettype($id) . " instead.");
@@ -189,6 +299,9 @@ class Booking {
 		$this->id = $id;
 	}
 
+	/**
+	 * @param int $id
+	 */
 	public function setConsumerID($id) {
 		if (!Validate::int($id)) {
 			throw new InvalidArgumentException("setConsumerID expected integer ID, got " . gettype($id) . " instead.");
@@ -197,6 +310,9 @@ class Booking {
 		$this->consumerID = $id;
 	}
 
+	/**
+	 * @param int $id
+	 */
 	public function setPropertyID($id) {
 		if (!Validate::int($id)) {
 			throw new InvalidArgumentException("setPropertyID expected integer ID, got " . gettype($id) . " instead.");
@@ -205,16 +321,25 @@ class Booking {
 		$this->propertyID = $id;
 	}
 
+	/**
+	 * @param DateTime $start
+	 */
 	public function setStartDate(DateTime $start) {
 		$this->startDate = clone $start;
 		$this->startDate->setTime(0, 0, 0);
 	}
 
+	/**
+	 * @param DateTime $end
+	 */
 	public function setEndDate(DateTime $end) {
 		$this->endDate = clone $end;
 		$this->endDate->setTime(0, 0, 0);
 	}
 
+	/**
+	 * @param int $id
+	 */
 	public function setStatusID($id) {
 		if (!Validate::int($id)) {
 			throw new InvalidArgumentException("setStatusID expected integer ID, got " . gettype($id) . " instead.");
