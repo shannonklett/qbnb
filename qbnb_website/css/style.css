@@ -257,6 +257,22 @@ h2 {
     padding: 25px;
 }
 
+.empty-property {
+    border: solid;
+    border-style: dashed;
+    border-color: #ededed;
+    border-width: 2px;
+    padding: 98px;
+    background-color: transparent;;
+}
+
+.add-property{
+    text-align: center;
+    font-weight: 400;
+    font-size: 23px;
+    color: #999999;
+}
+
 .property-block {
     padding: 25px;
     background-color: #f9f9f9;
