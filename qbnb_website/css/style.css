@@ -1,0 +1,277 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,800,700);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Open Sans";
+    font-size: 14px;
+    line-height: 100px;
+    color: #43575d;
+}
+
+input {
+    display: block;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: "Ubuntu";
+    font-weight: 700;
+    font-size: 4em;
+    color: #fff;
+}
+
+h2 {
+    font-family: "Ubuntu";
+    font-weight: 300;
+    font-size: 2em;
+    color: #fff;
+}
+
+.form-control {
+    font-family: "Open Sans";
+    font-weight: 300;
+    color: #999999;
+    padding: 0 10px;
+    height: 40px;
+    border-radius: 0px;
+    border-color: #ededed;
+    box-shadow: none;
+}
+
+.intro-subtext {
+    width: 350px;
+}
+.intro-text {
+    position: fixed;
+    left: 10%;
+    top: 15%;
+}
+.intro-logo {
+    max-height: 125px
+}
+.btn {
+    border-radius: 3px;
+    border-width: 1.5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 12px 50px
+}
+
+.login-btn {
+    background-color: #fff;
+    border-color: #2aac95;
+    margin-right: 12px;
+    color: #2aac95;
+    font-weight: 300;
+}
+
+.login-btn:hover {
+    color: #fff;
+    background-color: #495356;
+    border-color: #495356;
+}
+
+.register-btn {
+    background-color: #2aac95;
+    border-color: #2aac95;
+    color: #fff;
+    font-weight: 300;
+}
+
+.register-btn:hover {
+    color: #fff;
+    background-color: #495356;
+    border-color: #495356;
+}
+
+.form-group {
+    text-align: center;
+}
+
+.login-box {
+    position: fixed;
+    bottom: 0;
+    right: 10%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: #ffffff;
+    width: 29em;
+    height: 20em;
+    padding: 50px 30px;
+}
+
+.background {
+    background-repeat: no-repeat;
+    background-position: 20% 50%;
+    background-position: 20% 50%\9 !important;
+}
+
+#small-logo {
+    width: 45px;
+    margin-right: 5px;
+}
+
+.fullscreen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.fullscreen.overflow {
+    height: auto;
+    min-height: 100%;
+}
+
+@media (max-width: 950px) {
+
+    h1 {
+        font-family: "Ubuntu";
+        font-weight: 700;
+        font-size: 2em;
+    }
+
+    h2 {
+        display: none;
+    }
+
+    .login-box {
+        position: absolute;
+        bottom: 0px;
+        border-radius: 0px;
+        right: 0;
+        left: 0;
+        height: 70%;
+        width: 100%;
+    }
+
+    .intro-text {
+        position: relative;
+        text-align: center;
+        left: 0;
+        top: 10%;
+        width: 100%;
+    }
+
+    .intro-text #logo {
+        display: none;
+    }
+
+}
+
+/*==============================
+=========Navigation-section=========
+================================*/
+/* ========== Dark Navigation ========== */
+.navbar-default {
+    background-color: #495356;
+    border-color: #495356;
+}
+
+.navbar-default .navbar-collapse, 
+.navbar-default .navbar-form {
+    border-color: rgba(14,14,14,0.9);
+}
+
+.navbar-nav>li>a { 
+    text-transform: uppercase;
+}
+
+.navbar-default .navbar-nav>li>a {
+    font-family: "Ubuntu";
+    font-weight: 300;
+    color: #fff;
+}
+
+.navbar-nav>li>a:hover,
+.navbar-nav>li>a:focus {
+    color:#6C7A89;
+}
+
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:focus, 
+.navbar-default .navbar-nav>.active>a:hover {
+    background: transparent;
+    color: #6C7A89;
+}
+
+.navbar-brand {
+    padding: 13px 15px;
+}
+
+.navbar {
+    min-height:50px;
+}
+
+.navbar-default .navbar-toggle:focus, 
+.navbar-default .navbar-toggle:hover {
+    background-color:transparent;
+}
+
+.navbar-default .navbar-toggle {
+    border-color:transparent;
+}
+
+.navbar-toggle {
+    padding: 14px 10px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #6C7A89;
+}
+
+.sub-header {
+    height: 14em;
+}
+
+.boxed-text {
+    margin-top: 50px;
+    padding: 55px;
+    position: relative;
+    text-align: center;
+    font-family: "Ubuntu";
+    font-weight: 400;
+}
+
+#banner {
+    position:relative;
+    background-position: 50% 40%;
+    background-image: url("../images/banner.jpg");
+    padding-bottom:0;
+    overflow:hidden;
+}
+
+.image-bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    color:#fff;
+    position: relative;
+}
+
+.property-block {
+    background-color: #f9f9f9;
+    padding: 35px;
+}
+
+.overlay-bg {
+    position: absolute;
+    top: 0;
+    left :0;
+    width: 100%;
+    height: 100%;
+    background: rgb(40,171,149);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI4YWI5NSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3YmQxYTAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(left,  rgba(40,171,149,1) 0%, rgba(123,209,160,0.90) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(40,171,149,1)), color-stop(100%,rgba(123,209,160,0.90)));
+    background: -webkit-linear-gradient(left,  rgba(40,171,149,1) 0%,rgba(123,209,160,0.90) 100%);
+    background: -o-linear-gradient(left,  rgba(40,171,149,1) 0%,rgba(123,209,160,0.90) 100%);
+    background: -ms-linear-gradient(left,  rgba(40,171,149,1) 0%,rgba(123,209,160,0.90) 100%);
+    background: linear-gradient(to right,  rgba(40,171,149,1) 0%,rgba(123,209,160,0.90) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28ab95', endColorstr='#7bd1a0',GradientType=1 );
+}
+}
