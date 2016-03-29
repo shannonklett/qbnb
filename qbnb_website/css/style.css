@@ -253,9 +253,74 @@ h2 {
     position: relative;
 }
 
+.col-sm-6{
+    padding: 25px;
+}
+
 .property-block {
+    padding: 25px;
     background-color: #f9f9f9;
-    padding: 35px;
+}
+
+.property-block:hover {
+    background-color: #d6d6d6;
+    cursor: pointer;
+}
+
+.property-info {
+    display: inline;
+}
+
+#price-text {
+    position: absolute;
+    font-weight: 500;
+    color: #fff;
+    left: 235px;
+    top: 134px;
+}
+
+.price-tag {
+    background-image: url('../images/price_tag.png');
+    background-repeat: no-repeat;
+    background-size: 104px 28px;
+    width: 104px;
+    height: 28px;
+    position: absolute;
+    left: 226px;
+    top: 170px;
+}
+
+.property-title {
+    font-family: "Ubuntu";
+    font-weight: 500;
+    font-size: 19px;
+    position: absolute;
+    left: 225px;
+    top: 20px;
+}
+
+.property-address {
+    font-family: "Ubuntu";
+    font-weight: 300;
+    font-size: 15px;
+    position: absolute;
+    left: 225px;
+    top: 50px;
+}
+
+.property-type {
+    font-family: "Ubuntu";
+    font-weight: 300;
+    font-size: 15px;
+    position: absolute;
+    left: 225px;
+    top: 103px;
+}
+
+.property-pic{
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
 }
 
 .overlay-bg {
