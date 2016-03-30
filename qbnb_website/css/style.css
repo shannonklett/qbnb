@@ -71,6 +71,7 @@ h2 {
     color: #fff;
     border-top-left-radius: 0px!important;
     border-bottom-left-radius: 0px!important;
+    padding: 9px 50px;
 }
 
 .btn-search:hover{
