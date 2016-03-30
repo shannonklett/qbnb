@@ -10,7 +10,6 @@ body {
     margin: 0;
     font-family: "Open Sans";
     font-size: 14px;
-    line-height: 100px;
     color: #43575d;
 }
 
@@ -253,7 +252,8 @@ h2 {
     position: relative;
 }
 
-.col-sm-6{
+.col-sm-6,
+.col-md-4 {
     padding: 25px;
 }
 
@@ -268,7 +268,7 @@ h2 {
 
 .add-property{
     position: absolute;
-    top: 100px;
+    top: 140px;
     left: 215px;
     text-align: center;
     font-weight: 400;
@@ -282,6 +282,21 @@ h2 {
     left: 273px;
     top: 95px;
     color: #999999;
+}
+
+.info-property-pic-div {
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+}
+
+.info-property-price{
+    position: absolute;
+    left: 688px;
+    top: 230px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
 }
 
 .property-block {
@@ -304,7 +319,7 @@ h2 {
     font-weight: 500;
     color: #fff;
     left: 235px;
-    top: 134px;
+    top: 174px;
 }
 
 .price-tag {
@@ -324,7 +339,7 @@ h2 {
     font-size: 19px;
     position: absolute;
     left: 225px;
-    top: 20px;
+    top: 63px
 }
 
 .property-address {
@@ -333,7 +348,7 @@ h2 {
     font-size: 15px;
     position: absolute;
     left: 225px;
-    top: 50px;
+    top: 87px;
 }
 
 .property-type {
@@ -342,7 +357,7 @@ h2 {
     font-size: 15px;
     position: absolute;
     left: 225px;
-    top: 103px;
+    top: 130px;
 }
 
 .property-pic{
