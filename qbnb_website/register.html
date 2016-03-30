@@ -22,61 +22,104 @@
 </head>
 
 <body data-target=".navbar-fixed-top">
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container"> 
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="/"><img src="images/logo_small.png" class="img-responsive" width="200" /></a> </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#search">search</a></li>
-        <li><a href="#properties">my properties</a></li>
-        <li><a href="#settings">settings</a></li>
-        <li><a href="#logout">logout</a></li>
-      </ul>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <a class="navbar-brand" href="/"><img src="images/logo_small.png" class="img-responsive" width="200" />
+                </a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#search">search</a>
+                    </li>
+                    <li><a href="#properties">my properties</a>
+                    </li>
+                    <li><a href="#settings">settings</a>
+                    </li>
+                    <li><a href="#logout">logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="banner" class="sub-header image-bg">
+        <div class="overlay-bg"></div>
+        <div class="container">
+            <h3 class="boxed-text">My Properties</h3>
+        </div>
     </div>
-  </div>
-</nav>
-<div id="banner" class="sub-header image-bg">
-    <div class="overlay-bg"></div>
+
     <div class="container">
-        <h3 class="boxed-text">My Properties</h3>
+
+
+        <form action="action_page.php">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="firstname">
+
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lastname">
+
+            <label for="useremail">Email</label>
+            <input type="email" id="useremail" name="email">
+
+            <label for="userpass">Password</label>
+            <input type="password" id="userpass" name="password">
+
+            <label for="userphone">Phone Number</label>
+            <input type="tel" id="userphone" name="phone">
+
+            <label for="gradyear">Graduation Year</label>
+            <input type="number" id="gradyear" name="graduation">
+
+            <label for="faculty">Faculty</label>
+            <select name="faculty" id="userfaculty">
+                <option value="1">Faculty of Arts and Science</option>
+                <option value="2">Faculty of Education</option>
+                <option value="3">Faculty of Engineering and Applied Science</option>
+                <option value="4">Faculty of Health Sciences</option>
+                <option value="5">Faculty of Law</option>
+                <option value="6">Smith School of Business</option>
+                <option value="7">School of Graduate Studies</option>
+                <option value="8">School of Policy Studies</option>
+                <option value="9">Other</option>
+            </select>
+
+            <label for="degreetype">Degree Type</label>
+            <select name="degreetype" id="userdegree">
+                <option value="1">BA</option>
+                <option value="2">BCMP</option>
+                <option value="3">BFA</option>
+                <option value="4">BMUS</option>
+                <option value="5">BPHE</option>
+                <option value="6">BSC</option>
+                <option value="7">BED</option>
+                <option value="8">BENG</option>
+                <option value="9">BCOMM</option>
+                <option value="10">MBA</option>
+                <option value="11">MD</option>
+                <option value="12">MA</option>
+                <option value="13">MES</option>
+                <option value="14">LLM</option>
+                <option value="15">PHD</option>
+                <option value="16">OTHER</option>
+            </select>
+
+            <label for="gender">Faculty</label>
+            <select name="gender" id="usergender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <input type="submit" value="Submit">
+        </form>
+
     </div>
-</div>
 
-<div class="container">
-<div class="row">
-
-  <div class="col-sm-6">
-    <div class="empty-property">
-      <i class="fa fa-plus add-icon"></i>
-      <p class="add-property">Add Property</p>
-    </div>
-  </div>
-
-  <div class="col-sm-6">
-    <div class="property-block">
-      <img class="property-pic" src="images/property_1.jpg">
-      <div class="property-info">
-        <span class="property-title">Private Room in Venice Beach</span>
-        <span class="property-address">1708 Linden Ave, Venice, CA 90291, USA</span>
-        <span class="property-type">Entire Apt/House</span>
-        <div class="price-tag"></div>
-        <span id="price-text">$99.00</span>
-      </div>
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-</body>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/parallax.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/parallax.js"></script>
 </body>
 
 </html>
