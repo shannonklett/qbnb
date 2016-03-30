@@ -63,6 +63,21 @@ h2 {
     padding: 12px 50px
 }
 
+.btn-search {
+    height: 40px;
+    background-color: #147ddb;
+    border-color: #147ddb;
+    color: #fff;
+    border-top-left-radius: 0px!important;
+    border-bottom-left-radius: 0px!important;
+}
+
+.btn-search:hover{
+    background-color: #145d93;
+    border-color: #145d93;
+    color: #fff;
+}
+
 .login-btn {
     background-color: #fff;
     border-color: #2aac95;
@@ -115,6 +130,13 @@ h2 {
 #small-logo {
     width: 45px;
     margin-right: 5px;
+}
+
+.col-md-3,
+.col-md-2,
+.col-md-1 {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .fullscreen {
@@ -234,11 +256,23 @@ h2 {
     height: 14em;
 }
 
+select {
+    border-radius: 0px;
+    -webkit-appearance: none;
+}
+
 .search-header {
     height: 27em;
     width: 100%;
     -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 55% 75%, 50% 90%, 45% 75%, 0% 75%);
     clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 55% 75%, 50% 90%, 45% 75%, 0% 75%);
+}
+
+.search-bar {
+    position: absolute;
+    top: 145px;
+    width: 1000px;
+    left: 125px;
 }
 
 .boxed-text {
@@ -266,8 +300,19 @@ h2 {
 }
 
 .col-sm-6,
-.col-md-4 {
+.col-md-4, {
     padding: 25px;
+}
+
+input[type="date"]:before {
+    content: attr(placeholder) !important;
+    color: #aaa;
+    margin-right: 0.5em;
+}
+
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+    content: "";
 }
 
 .empty-property {
@@ -384,7 +429,6 @@ h2 {
     font-family: "Ubuntu";
     font-weight: 500;
     font-size: 19px;
-
 }
 
 .overlay-bg {
