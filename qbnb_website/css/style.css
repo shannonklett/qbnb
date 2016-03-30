@@ -267,9 +267,20 @@ h2 {
 }
 
 .add-property{
+    position: absolute;
+    top: 100px;
+    left: 215px;
     text-align: center;
     font-weight: 400;
     font-size: 23px;
+    color: #999999;
+}
+
+.add-icon{
+    position: absolute;
+    font-size: 35px!important;
+    left: 273px;
+    top: 95px;
     color: #999999;
 }
 
@@ -278,6 +289,7 @@ h2 {
     background-color: #f9f9f9;
 }
 
+.empty-property:hover, 
 .property-block:hover {
     background-color: #d6d6d6;
     cursor: pointer;
