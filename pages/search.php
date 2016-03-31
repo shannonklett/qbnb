@@ -1,6 +1,6 @@
 <?php
 
-$results = false;
+$results = RentalProperty::getAll();
 
 $features = [
 	"has_air_conditioning"  => "Has air conditioning",

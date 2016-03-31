@@ -239,7 +239,7 @@ class RentalProperty {
 	public static function getAll() {
 		try {
 			$pdo  = DB::getHandle();
-			$stmt = $pdo->query("SELECT * FROM rental_properties");
+			$stmt = $pdo->query("SELECT * FROM rental_properties ORDER BY name ASC");
 			$results = $stmt->fetchAll();
 			if ($results === false) {
 				return [];

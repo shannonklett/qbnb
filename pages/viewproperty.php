@@ -11,6 +11,8 @@ try {
 	Session::redirect("./");
 }
 
+$features = $property->getFeatures();
+
 include "pages/header.php";
 
 $bannerText = "Property Details";
@@ -24,8 +26,8 @@ include "pages/banner.php";
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <img class="info-property-pic" width="100%" src="images/property_1.jpg">
-      <div class="info-property-price"><?php echo $property->getPrice(); ?></div>
+      <img class="info-property-pic" width="100%" src="qbnb_website/images/property_1.jpg">
+      <div class="info-property-price">$<?php echo $property->getPrice(); ?>.00</div>
       <a class="pencil-icon" href=""><i class="fa fa-pencil"></i></a>
       <a class="remove-icon" href=""><i class="fa fa-times"></i></a>
     </div>
@@ -58,11 +60,11 @@ include "pages/banner.php";
           <tbody>
             <tr>
               <td><strong>Property District</strong></td>
-              <td><?php echo $property->getDistrictID(); ?></td>
+              <td><?php echo $property->getDistrict()->getName(); ?></td>
             </tr>
             <tr>
               <td><strong>Property Type</strong></td>
-              <td><?php echo $property->getPropertyTypeID(); ?></td>
+              <td><?php echo $property->getPropertyTypeName(); ?></td>
             </tr>
             <tr>
               <td><strong>Max Guests</strong></td>
