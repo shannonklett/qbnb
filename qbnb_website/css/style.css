@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,800,700);
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
-@import url (https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
 
 html,
 body {
@@ -137,8 +137,8 @@ h2 {
 .col-md-3,
 .col-md-2,
 .col-md-1 {
-    padding-right: 0px;
-    padding-left: 0px;
+    /*padding-right: 0px;*/
+    /*padding-left: 0px;*/
 }
 
 .fullscreen {
@@ -153,8 +153,8 @@ h2 {
     min-height: 100%;
 }
 
-.center-text{
-    text-align: center;4
+.center-text {
+    text-align: center;
 }
 
 @media (max-width: 950px) {
@@ -318,13 +318,19 @@ textarea,
 
 .col-sm-6,
 .col-md-4 {
-    padding: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 input[type="date"]:before {
     content: attr(placeholder) !important;
     color: #aaa;
     margin-right: 0.5em;
+}
+
+input[type="checkbox"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 input[type="date"]:focus:before,
@@ -479,5 +485,4 @@ input[type="date"]:valid:before {
     background: -ms-linear-gradient(left,  rgba(40,171,149,1) 0%,rgba(123,209,160,0.90) 100%);
     background: linear-gradient(to right,  rgba(40,171,149,1) 0%,rgba(123,209,160,0.90) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28ab95', endColorstr='#7bd1a0',GradientType=1 );
-}
 }
