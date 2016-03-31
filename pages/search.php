@@ -16,12 +16,21 @@ $features = [
 	"has_private_bathroom"  => "Has private bathroom",
 ];
 
+$selectedDistrict = 0;
+$selectedType = 0;
+$selectedFeature = 0;
+$selectedPrice = "";
+
 if (isset($_POST["searchSubmit"])) {
+
+	$selectedDistrict = (int) $_POST["district"];
+	$selectedType = (int) $_POST["type"];
 
 	if ($_POST["features"] == "0") {
 		$feature = "";
 	} else {
 		$feature = $_POST["features"];
+		$selectedFeature = $feature;
 	}
 
 	if ($_POST["maxprice"]) {
@@ -32,8 +41,13 @@ if (isset($_POST["searchSubmit"])) {
 	} else {
 		$maxPrice = false;
 	}
+	if ($maxPrice !== false) {
+		$selectedPrice = $maxPrice;
+	}
+	echo "<br><br>";
+	var_dump($maxPrice);
 
-	$results = RentalProperty::search($_POST["district"], $_POST["type"], $feature, $maxPrice);
+	$results = RentalProperty::search($selectedDistrict, $selectedType, $feature, $maxPrice);
 
 }
 
@@ -47,32 +61,32 @@ include "pages/header.php"; ?>
 
 				<div class="col-md-3" style="padding-left: 0; padding-right: 0">
 					<select class="form-control select-search-form" name="district">
-						<option value="0">Select District</option>
+						<option value="0" <?php if ($selectedDistrict == 0) echo 'selected'; ?>>Select District</option>
 						<option disabled>──────────</option>
 						<?php foreach (RentalProperty::getCityDistricts() as $districtID => $district) { ?>
-						<option value="<?php echo $districtID; ?>"><?php echo $district->getName(); ?></option>
+						<option value="<?php echo $districtID; ?>" <?php if ($selectedDistrict == $districtID) echo 'selected'; ?>><?php echo $district->getName(); ?></option>
 						<?php } ?>
 					</select>
 				</div>
 				<div class="col-md-3" style="padding-left: 0; padding-right: 0">
 					<select class="form-control select-search-form" name="type">
-						<option value="0">Select Type</option>
+						<option value="0" <?php if ($selectedType == 0) echo 'selected'; ?>>Select Type</option>
 						<option disabled>──────────</option>
 						<?php foreach (RentalProperty::getPropertyTypes() as $typeID => $typeName) { ?>
-						<option value="<?php echo $typeID; ?>"><?php echo $typeName; ?></option>
+						<option value="<?php echo $typeID; ?>" <?php if ($selectedType == $typeID) echo 'selected'; ?>><?php echo $typeName; ?></option>
 						<?php } ?>
 					</select>
 				</div>
 				<div class="col-md-3" style="padding-left: 0; padding-right: 0">
 					<select class="form-control select-search-form" name="features">
-						<option value="0">Select Feature</option>
+						<option value="0" <?php if ($selectedFeature == 0) echo 'selected'; ?>>Select Feature</option>
 						<option disabled>──────────</option>
 						<?php foreach ($features as $featureName => $featureText) { ?>
-							<option value="<?php echo $featureName; ?>"><?php echo $featureText; ?></option>
+							<option value="<?php echo $featureName; ?>" <?php if ($selectedFeature === $featureName) echo 'selected'; ?>><?php echo $featureText; ?></option>
 						<?php } ?>
 					</select>
 				</div>
-				<div class="col-md-2" style="padding-left: 0; padding-right: 0"><input type="number" min="0" class="form-control" name="maxprice" placeholder="Max Price"></div>
+				<div class="col-md-2" style="padding-left: 0; padding-right: 0"><input type="number" min="0" class="form-control" name="maxprice" placeholder="Max Price" value="<?php echo $selectedPrice; ?>"></div>
 				<div class="col-md-1" style="padding-left: 0; padding-right: 0"><button class="btn btn-default btn-search" type="submit">SEARCH</button></div>
 
 			</form>
