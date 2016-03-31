@@ -15,11 +15,11 @@ if (!User::current()->isAdmin() &&  $property->getSupplierID() !== User::current
 	Session::redirect("./?property=" . $property->getID());
 }
 
+$features = $property->getFeatures();
+
 if (isset($_POST["propertyEditSubmit"])) {
 
 	if (Validate::plainText($_POST["propertyname"]) && Validate::plainText($_POST["propertyaddress"]) && Validate::int($_POST["numberofguest"]) && Validate::int($_POST["numberofroom"]) && Validate::int($_POST["numberofbathroom"]) && Validate::int($_POST["price"]) && Validate::plainText($_POST["description"])) {
-
-		$features = $property->getFeatures();
 
 		$features["has_air_conditioning"] = isset($_POST["airconditioning"]);
 		$features["has_cable_tv"] = isset($_POST["cabletv"]);
@@ -63,27 +63,28 @@ include "pages/banner.php";
         <form action="" method="post">
 
         <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="pname">Property Name</label>
-          <input class="form-control" type="text" id="pname" name="propertyname" value="<?php echo $property->getName(); ?>" required>
+          <div class="col-md-6 col-md-offset-3">
+	          <label for="pname">Property Name</label>
+	          <input class="form-control" type="text" id="pname" name="propertyname" value="<?php echo $property->getName(); ?>" required>
+          </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="address">Property Address</label>
-          <input class="form-control" type="text" id="address" name="propertyaddress" value="<?php echo $property->getAddress(); ?>" required>
+          <div class="col-md-6 col-md-offset-3">
+	          <label for="address">Property Address</label>
+	          <input class="form-control" type="text" id="address" name="propertyaddress" value="<?php echo $property->getAddress(); ?>" required>
+          </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="district">Property District</label>
+          <div class="col-md-3 col-md-offset-3"><label for="district">Property District</label>
             <select class="form-control select-search-form" name="propertydistrict" id="district">
 			<?php foreach (RentalProperty::getCityDistricts() as $districtID => $district) { ?>
 				<option value="<?php echo $districtID; ?>" <?php if ($districtID == $property->getDistrictID()) echo 'selected'; ?>><?php echo $district->getName(); ?></option>
 			<?php } ?>
 			</select>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="propertytype">Property Type</label>
+          <div class="col-md-3"><label for="propertytype">Property Type</label>
             <select class="form-control select-search-form" name="type" id="propertytype">
 			<?php foreach (RentalProperty::getPropertyTypes() as $typeID => $typeName) { ?>
 				<option value="<?php echo $typeID; ?>" <?php if ($typeID == $property->getPropertyTypeID()) echo 'selected'; ?>><?php echo $typeName; ?></option>
@@ -93,25 +94,19 @@ include "pages/banner.php";
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="numguest">Number of Guest</label>
+          <div class="col-md-2 col-md-offset-3"><label for="numguest">Max Guests</label>
             <input class="form-control" type="number" id="numguest" name="numberofguest" value="<?php echo $property->getNumGuests(); ?>" required>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="numroom">Number of Room</label>
+          <div class="col-md-2"><label for="numroom">Number of Rooms</label>
             <input class="form-control" type="number" id="numroom" name="numberofroom" value="<?php echo $property->getNumRooms(); ?>" required>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="numbathroom">Number of Bathrooms</label>
+          <div class="col-md-2"><label for="numbathroom">Number of Bathrooms</label>
             <input class="form-control" type="number" id="numbathroom" name="numberofbathroom" value="<?php echo $property->getNumBathrooms(); ?>" required>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6 col-md-offset-3"><label for="propertyprice">Property Price</label>
+          <div class="col-md-6 col-md-offset-3"><label for="propertyprice">Property Price ($)</label>
             <input class="form-control" type="number" id="propertyprice" name="price" required value="<?php echo $property->getPrice(); ?>">
           </div>
         </div>
@@ -180,13 +175,12 @@ include "pages/banner.php";
             <input class="form-control bottom-mar" type="checkbox" id="featuresprivatebathroom" name="privatebathroom" <?php if ($features["has_private_bathroom"]) echo 'checked'; ?>>
           </div>
 
-
         </div>
 
         <div class="row">
         
         	<input type="hidden" name="propertyEditSubmit">
-        	<div class="col-md-3 col-md-offset-5"><input class="btn register-btn" type="submit" value="Submit"></div>
+        	<div class="col-md-3 col-md-offset-5"><button class="btn register-btn" type="submit">Submit</button></div>
 
         </div>
 

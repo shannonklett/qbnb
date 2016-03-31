@@ -26,7 +26,7 @@ $features = [
 	"has_private_bathroom"  => false,
 ];
 
-if (isset($_POST["propertyEditSubmit"])) {
+if (isset($_POST["propertyAddSubmit"])) {
 
 	$data["propertyname"] = $_POST["propertyname"];
 	$data["propertyaddress"] = $_POST["propertyaddress"];
@@ -71,70 +71,132 @@ include "pages/banner.php";
 
 ?>
 
+<div class="huge-padding"></div>
+
 <div class="container">
 
 	<form action="" method="post">
-		<label for="pname">Property Name</label>
-		<input type="text" id="pname" name="propertyname" value="<?php echo $data["propertyname"]; ?>" required>
 
-		<label for="address">Property Address</label>
-		<input type="text" id="address" name="propertyaddress" value="<?php echo $data["propertyaddress"]; ?>" required>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<label for="pname">Property Name</label>
+				<input class="form-control" type="text" id="pname" name="propertyname" value="<?php echo $data["propertyname"]; ?>" required>
+			</div>
+		</div>
 
-		<label for="district">Property District</label>
-		<select name="propertydistrict" id="district">
-			<?php foreach (RentalProperty::getCityDistricts() as $districtID => $district) { ?>
-				<option value="<?php echo $districtID; ?>" <?php if ($districtID == $data["propertydistrict"]) echo 'selected'; ?>><?php echo $district->getName(); ?></option>
-			<?php } ?>
-		</select>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<label for="address">Property Address</label>
+				<input class="form-control" type="text" id="address" name="propertyaddress" value="<?php echo $data["propertyaddress"]; ?>" required>
+			</div>
+		</div>
 
-		<label for="propertytype">Property Type</label>
-		<select name="type" id="propertytype">
-			<?php foreach (RentalProperty::getPropertyTypes() as $typeID => $typeName) { ?>
-				<option value="<?php echo $typeID; ?>" <?php if ($typeID == $data["type"]) echo 'selected'; ?>><?php echo $typeName; ?></option>
-			<?php } ?>
-		</select>
+		<div class="row">
+			<div class="col-md-3 col-md-offset-3"><label for="district">Property District</label>
+				<select class="form-control select-search-form" name="propertydistrict" id="district">
+					<?php foreach (RentalProperty::getCityDistricts() as $districtID => $district) { ?>
+						<option value="<?php echo $districtID; ?>" <?php if ($districtID == $data["propertydistrict"]) echo 'selected'; ?>><?php echo $district->getName(); ?></option>
+					<?php } ?>
+				</select>
+			</div>
+			<div class="col-md-3"><label for="propertytype">Property Type</label>
+				<select class="form-control select-search-form" name="type" id="propertytype">
+					<?php foreach (RentalProperty::getPropertyTypes() as $typeID => $typeName) { ?>
+						<option value="<?php echo $typeID; ?>" <?php if ($typeID == $data["type"]) echo 'selected'; ?>><?php echo $typeName; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
 
-		<label for="numguest">Number of Guests</label>
-		<input type="number" id="numguest" name="numberofguest" value="<?php echo $data["numberofguest"]; ?>" required>
+		<div class="row">
+			<div class="col-md-2 col-md-offset-3"><label for="numguest">Max Guests</label>
+				<input class="form-control" type="number" id="numguest" name="numberofguest" value="<?php echo $data["numberofguest"]; ?>" required>
+			</div>
+			<div class="col-md-2"><label for="numroom">Number of Rooms</label>
+				<input class="form-control" type="number" id="numroom" name="numberofroom" value="<?php echo $data["numberofroom"]; ?>" required>
+			</div>
+			<div class="col-md-2"><label for="numbathroom">Number of Bathrooms</label>
+				<input class="form-control" type="number" id="numbathroom" name="numberofbathroom" value="<?php echo $data["numberofbathroom"]; ?>" required>
+			</div>
+		</div>
 
-		<label for="numroom">Number of Rooms</label>
-		<input type="number" id="numroom" name="numberofroom" value="<?php echo $data["numberofroom"]; ?>" required>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3"><label for="propertyprice">Property Price ($)</label>
+				<input class="form-control" type="number" id="propertyprice" name="price" required value="<?php echo $data["price"]; ?>">
+			</div>
+		</div>
 
-		<label for="numbathroom">Number of Bathrooms</label>
-		<input type="number" id="numbathroom" name="numberofbathroom" value="<?php echo $data["numberofbathroom"]; ?>" required>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3"><label for="propertydesc">Description</label>
+				<textarea class="form-control" id="propertydesc" name="description" required rows="10"><?php echo $data["description"]; ?></textarea>
+			</div>
+		</div>
 
-		<label for="propertyprice">Property Price</label>
-		<input type="number" id="propertyprice" name="price" required value="<?php echo $data["price"]; ?>">
+		<div class="row">
 
-		<label for="propertydesc">Description</label>
-		<textarea id="propertydesc" name="description" required cols="50" rows="10"><?php echo $data["description"]; ?></textarea>
+			<div class="col-md-2 col-md-offset-3"><label for="featuresairconditioning">I have air conditioning</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featuresairconditioning" name="airconditioning" <?php if ($features["has_air_conditioning"]) echo 'checked'; ?>>
+			</div>
 
-		<label for="featuresairconditioning">I have air conditioning</label>
-		<input type="checkbox" id="featuresairconditioning" name="airconditioning" <?php if ($features["has_air_conditioning"]) echo 'checked'; ?>>
-		<label for="featurescabletv">I have cable tv</label>
-		<input type="checkbox" id="featurescabletv" name="cabletv" <?php if ($features["has_cable_tv"]) echo 'checked'; ?>>
-		<label for="featureslaundrymachines">I have laundry machines</label>
-		<input type="checkbox" id="featureslaundrymachines" name="laundrymachines" <?php if ($features["has_laundry_machines"]) echo 'checked'; ?>>
-		<label for="featuresparking">I have parking</label>
-		<input type="checkbox" id="featuresparking" name="parking" <?php if ($features["has_parking"]) echo 'checked'; ?>>
-		<label for="featuresgym">I have a gym</label>
-		<input type="checkbox" id="featuresgym" name=gym" <?php if ($features["has_gym"]) echo 'checked'; ?>>
-		<label for="featuresinternet">I have Internet</label>
-		<input type="checkbox" id="featuresinternet" name="internet" <?php if ($features["has_internet"]) echo 'checked'; ?>>
-		<label for="featurespets">I allow pets</label>
-		<input type="checkbox" id="featurespets" name="pets" <?php if ($features["pets_allowed"]) echo 'checked'; ?>>
-		<label for="featureswheelchairaccess">I have wheelchair access</label>
-		<input type="checkbox" id="featureswheelchairaccess" name="wheelchairaccess" <?php if ($features["has_wheelchair_access"]) echo 'checked'; ?>>
-		<label for="featurespool">I have a pool</label>
-		<input type="checkbox" id="featurespool" name="pool" <?php if ($features["has_pool"]) echo 'checked'; ?>>
-		<label for="featurestransportaccess">I have access to transport</label>
-		<input type="checkbox" id="featurestransportaccess" name="transportaccess" <?php if ($features["has_transport_access"]) echo 'checked'; ?>>
-		<label for="featuresprivatebathroom">I have a private bathroom</label>
-		<input type="checkbox" id="featuresprivatebathroom" name="privatebathroom" <?php if ($features["has_private_bathroom"]) echo 'checked'; ?>>
+			<div class="col-md-2"><label for="featurescabletv">I have cable tv</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featurescabletv" name="cabletv" <?php if ($features["has_cable_tv"]) echo 'checked'; ?>>
+			</div>
 
-		<input type="hidden" name="propertyEditSubmit">
-		<button type="submit" class="btn">Save Changes</button>
+			<div class="col-md-2"><label for="featureslaundrymachines">I have laundry machines</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featureslaundrymachines" name="laundrymachines" <?php if ($features["has_laundry_machines"]) echo 'checked'; ?>>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-2 col-md-offset-3"><label for="featuresparking">I have parking</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featuresparking" name="parking" <?php if ($features["has_parking"]) echo 'checked'; ?>>
+			</div>
+
+			<div class="col-md-2"><label for="featuresgym">I have a gym</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featuresgym" name="gym" <?php if ($features["has_gym"]) echo 'checked'; ?>>
+			</div>
+
+			<div class="col-md-2"><label for="featuresinternet">I have internet</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featuresinternet" name="internet" <?php if ($features["has_internet"]) echo 'checked'; ?>>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-2 col-md-offset-3"><label for="featurespets">I allow pets</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featurespets" name="pets" <?php if ($features["pets_allowed"]) echo 'checked'; ?>>
+			</div>
+
+			<div class="col-md-2"><label for="featureswheelchairaccess">I have wheelchair access</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featureswheelchairaccess" name="wheelchairaccess" <?php if ($features["has_wheelchair_access"]) echo 'checked'; ?>>
+			</div>
+
+			<div class="col-md-2"><label for="featurespool">I have a pool</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featurespool" name="pool" <?php if ($features["has_pool"]) echo 'checked'; ?>>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-2 col-md-offset-3"><label for="featurestransportaccess">I have access to transport</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featurestransportaccess" name="transportaccess" <?php if ($features["has_transport_access"]) echo 'checked'; ?>>
+			</div>
+
+			<div class="col-md-2"><label for="featuresprivatebathroom">I have a private bathroom</label>
+				<input class="form-control bottom-mar" type="checkbox" id="featuresprivatebathroom" name="privatebathroom" <?php if ($features["has_private_bathroom"]) echo 'checked'; ?>>
+			</div>
+
+		</div>
+
+		<input type="hidden" name="propertyAddSubmit">
+		<div class="col-md-3 col-md-offset-5"><button class="btn register-btn" type="submit">Submit</button></div>
 	</form>
+
+	<div class="huge-padding"></div>
 
 </div>
 
