@@ -102,7 +102,6 @@ include "pages/banner.php"; ?>
               <td>e@p.ca</td>
               <td>0</td>
               <td>0</td>
-              <td>0</td>
             </tr>
           </tbody>
         </table>
