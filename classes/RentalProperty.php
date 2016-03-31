@@ -12,7 +12,7 @@ class RentalProperty {
 		if (is_null(self::$propertyTypes)) {
 			self::$propertyTypes = [];
 			$pdo = DB::getHandle();
-			$stmt = $pdo->query("SELECT id, property_type_name FROM rental_property_types");
+			$stmt = $pdo->query("SELECT id, property_type_name FROM rental_property_types ORDER BY property_type_name ASC");
 			$results = $stmt->fetchAll();
 			if ($results !== false) {
 				foreach ($results as $row) {
@@ -346,9 +346,21 @@ class RentalProperty {
 		}
 		try {
 			$pdo = DB::getHandle();
+			$pdo->beginTransaction();
+
+			$stmt = $pdo->prepare("DELETE FROM reviews WHERE property_id = :id");
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+
+			$stmt = $pdo->prepare("DELETE FROM bookings WHERE property_id = :id");
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+
 			$stmt = $pdo->prepare("DELETE FROM rental_properties WHERE id = :id");
 			$stmt->bindParam(":id", $this->id);
 			$stmt->execute();
+
+			$pdo->commit();
 			return true;
 		} catch (PDOException $e) {
 			return false;

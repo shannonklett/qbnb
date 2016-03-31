@@ -192,54 +192,55 @@ include "pages/banner.php";
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="info-property-type">
-                <table class="table table-striped">
-                    <thead>
+	<?php if (User::current()->getID() !== $property->getSupplierID()) { ?>
 
-                        <tr>
-                            <th><span class="prop-info-color">Property Bookings</span>
-                            </th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="info-property-type">
+					<table class="table table-striped">
+						<thead>
 
-                    </thead>
-                    <tbody>
+						<tr>
+							<th><span class="prop-info-color">Current Bookings</span>
+							</th>
+							<th></th>
+							<th></th>
+						</tr>
 
-                        <tr>
-                            <td><strong>Booking #</strong>
-                            </td>
-                            <td><strong>Arrival Date</strong>
-                            </td>
-                            <td><strong>Departure Date</strong>
-                            </td>
-                        </tr>
+						</thead>
+						<tbody>
 
-                        <tr>
-                            <td>1</td>
-                            <td>2017-06-02</td>
-                            <td>2017-06-04</td>
-                        </tr>
+						<tr>
+							<td><strong>Arrival Date</strong></td>
+							<td><strong>Departure Date</strong></td>
+						</tr>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+						<?php foreach (Booking::getAllForProperty($property->getID()) as $booking) { ?>
+							<tr>
+								<td><?php echo $booking->getStartDate()->format(Format::DATE_FORMAT); ?></td>
+								<td><?php echo $booking->getEndDate()->format(Format::DATE_FORMAT); ?></td>
+							</tr>
+						<?php } ?>
 
-    <div class="row">
-        <div class="col-md-2 no-spacer-form-right col-md-offset-3">
-            <input type="date" class="form-control" placeholder="A" required>
-        </div>
-        <div class="col-md-2 no-spacer-form">
-            <input type="date" class="form-control" placeholder="D" required>
-        </div>
-        <div class="col-md-2 no-spacer-form-left">
-            <button class="btn btn-default book-button btn-search" type="button">BOOK</button>
-        </div>
-    </div>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2 no-spacer-form-right col-md-offset-3">
+				<input type="date" class="form-control" placeholder="A" required>
+			</div>
+			<div class="col-md-2 no-spacer-form">
+				<input type="date" class="form-control" placeholder="D" required>
+			</div>
+			<div class="col-md-2 no-spacer-form-left">
+				<button class="btn btn-default book-button btn-search" type="button">BOOK</button>
+			</div>
+		</div>
+
+	<?php } ?>
 
 </div>
 

@@ -207,7 +207,7 @@ class User {
 	public static function getAll() {
 		try {
 			$pdo  = DB::getHandle();
-			$stmt = $pdo->query("SELECT id, is_admin, first_name, last_name, email, phone_number, grad_year, faculty_id, degree_type_id, gender FROM users");
+			$stmt = $pdo->query("SELECT id, is_admin, first_name, last_name, email, phone_number, grad_year, faculty_id, degree_type_id, gender FROM users ORDER BY first_name ASC, last_name ASC");
 			$results = $stmt->fetchAll();
 			if ($results === false) {
 				return [];
@@ -234,15 +234,15 @@ class User {
 		try {
 			$pdo = DB::getHandle();
 			$stmt = $pdo->prepare("UPDATE users SET is_admin = :is_admin, first_name = :first_name, last_name = :last_name, email = :email, phone_number = :phone_number, grad_year = :grad_year, faculty_id = :faculty_id, degree_type_id = :degree_type_id, gender = :gender WHERE id = :id");
-			$stmt->bindParam(":is_admin", $isAdmin);
-			$stmt->bindParam(":first_name", $firstName);
-			$stmt->bindParam(":last_name", $lastName);
-			$stmt->bindParam(":email", $email);
-			$stmt->bindParam(":phone_number", $phoneNumber);
-			$stmt->bindParam(":grad_year", $gradYear);
-			$stmt->bindParam(":faculty_id", $facultyID);
-			$stmt->bindParam(":degree_type_id", $degreeTypeID);
-			$stmt->bindParam(":gender", $gender);
+			$stmt->bindParam(":is_admin", $this->isAdmin);
+			$stmt->bindParam(":first_name", $this->firstName);
+			$stmt->bindParam(":last_name", $this->lastName);
+			$stmt->bindParam(":email", $this->email);
+			$stmt->bindParam(":phone_number", $this->phoneNumber);
+			$stmt->bindParam(":grad_year", $this->gradYear);
+			$stmt->bindParam(":faculty_id", $this->facultyID);
+			$stmt->bindParam(":degree_type_id", $this->degreeTypeID);
+			$stmt->bindParam(":gender", $this->gender);
 			$stmt->bindParam(":id", $this->id);
 			$stmt->execute();
 			return true;
@@ -260,9 +260,29 @@ class User {
 		}
 		try {
 			$pdo = DB::getHandle();
+			$pdo->beginTransaction();
+
+			$stmt = $pdo->prepare("DELETE r FROM reviews r JOIN rental_properties p ON r.property_id = p.id WHERE p.supplier_id = :id");
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+
+			$stmt = $pdo->prepare("DELETE b FROM bookings b JOIN rental_properties p ON b.property_id = p.id WHERE p.supplier_id = :id");
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+
+			$stmt = $pdo->prepare("DELETE FROM bookings WHERE consumer_id = :id");
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+
+			$stmt = $pdo->prepare("DELETE FROM rental_properties WHERE supplier_id = :id");
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+
 			$stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
 			$stmt->bindParam(":id", $this->id);
 			$stmt->execute();
+
+			$pdo->commit();
 			return true;
 		} catch (PDOException $e) {
 			return false;
@@ -472,6 +492,10 @@ class User {
 		if (!Validate::int($year)) {
 			throw new InvalidArgumentException("setGradYear expected integer year, got " . gettype($year) . " instead.");
 		}
+		$year = (int) $year;
+		if ($year < 0) {
+			throw new InvalidArgumentException("Invalid year supplied to setGradYear.");
+		}
 		$this->gradYear = $year;
 	}
 
@@ -483,7 +507,7 @@ class User {
 			throw new InvalidArgumentException("setFacultyID expected integer ID, got " . gettype($id) . " instead.");
 		}
 		$id = (int) $id;
-		if (!array_key_exists($id, self::$faculties)) {
+		if (!array_key_exists($id, self::getFaculties())) {
 			throw new InvalidArgumentException("Nonexistent ID supplied to setFacultyID.");
 		}
 		$this->facultyID = $id;
@@ -497,7 +521,7 @@ class User {
 			throw new InvalidArgumentException("setDegreeTypeID expected integer ID, got " . gettype($id) . " instead.");
 		}
 		$id = (int) $id;
-		if (!array_key_exists($id, self::$degreeTypes)) {
+		if (!array_key_exists($id, self::getDegreeTypes())) {
 			throw new InvalidArgumentException("Nonexistent ID supplied to setDegreeTypeID.");
 		}
 		$this->degreeTypeID = $id;

@@ -1,5 +1,28 @@
 <?php
 
+$success = "";
+
+if (isset($_POST["settingsSubmit"])) {
+
+	if (Validate::email($_POST["email"]) && Validate::phone($_POST["phone"]) && Validate::int($_POST["graduation"])) {
+		User::current()->setFirstName($_POST["firstname"]);
+		User::current()->setLastName($_POST["lastname"]);
+		User::current()->setEmail($_POST["email"]);
+		User::current()->setPhoneNumber($_POST["phone"]);
+		User::current()->setGradYear($_POST["graduation"]);
+		User::current()->setFacultyID($_POST["faculty"]);
+		User::current()->setDegreeTypeID($_POST["degreetype"]);
+		User::current()->setGender($_POST["gender"]);
+		$success = User::current()->update();
+
+		if ($success && $_POST["password"]) {
+			User::current()->setPassword($_POST["password"]);
+			$success = User::current()->update();
+		}
+	}
+
+}
+
 include "pages/header.php"; ?>
 
 <!DOCTYPE html>
@@ -35,49 +58,46 @@ include "pages/banner.php"; ?>
 
 	<form action="" method="post">
 
+		<?php if ($success) { ?>
+
+			<div class="alert alert-success" role="alert"> <strong>Great job!</strong> You successfully updated your settings! </div>
+
+		<?php } else {
+			echo $success;
+		} ?>
+
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2" style="padding-top: 0;">
 				<label for="fname">First Name</label>
-				<input class="form-control" type="text" id="fname" name="firstname" value="gg" required>
+				<input class="form-control" type="text" id="fname" name="firstname" value="<?php echo User::current()->getFirstName(); ?>" required>
 			</div>
 			<div class="col-md-4" style="padding-top: 0;">
 				<label for="lname">Last Name</label>
-				<input class="form-control" type="text" id="lname" name="lastname" required>
+				<input class="form-control" type="text" id="lname" name="lastname" value="<?php echo User::current()->getLastName(); ?>" required>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2" style="padding-top: 0;">
 				<label for="useremail">Email</label>
-				<input class="form-control" type="email" id="useremail" name="email" required>
+				<input class="form-control" type="email" id="useremail" name="email" value="<?php echo User::current()->getEmail(); ?>" required>
 			</div>
 			<div class="col-md-4" style="padding-top: 0;">
 				<label for="userphone">Phone Number</label>
-				<input class="form-control" type="tel" id="userphone" name="phone" required>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 col-md-offset-2" style="padding-top: 0;">
-				<label for="userpass">Password</label>
-				<input class="form-control" type="password" id="userpass" name="password" required>
-			</div>
-			<div class="col-md-4" style="padding-top: 0;">
-				<label for="userpass">Confirm Password</label>
-				<input class="form-control" type="password" id="userpass" name="password" required>
+				<input class="form-control" type="tel" id="userphone" name="phone" value="<?php echo User::current()->getPhoneNumber(); ?>" required>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-2 col-md-offset-2" style="padding-top: 0;">
 				<label for="gradyear">Graduation Year</label>
-				<input class="form-control" type="number" id="gradyear" name="graduation" value="2016" required>
+				<input class="form-control" type="number" id="gradyear" name="graduation" value="<?php echo User::current()->getGradYear(); ?>" required>
 			</div>
 			<div class="col-md-4" style="padding-top: 0;">
 				<label for="userfaculty">Faculty</label>
 				<select class="form-control select-search-form" name="faculty" id="userfaculty">
 					<?php foreach (User::getFaculties() as $id => $faculty) { ?>
-						<option value="<?php echo $id; ?>"><?php echo $faculty; ?></option>
+						<option value="<?php echo $id; ?>" <?php if ($id == User::current()->getFacultyID()) echo 'selected'; ?>><?php echo $faculty; ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -85,7 +105,7 @@ include "pages/banner.php"; ?>
 				<label for="userdegree">Degree Type</label>
 				<select class="form-control select-search-form" name="degreetype" id="userdegree">
 					<?php foreach (User::getDegreeTypes() as $id => $type) { ?>
-						<option value="<?php echo $id; ?>"><?php echo $type; ?></option>
+						<option value="<?php echo $id; ?>" <?php if ($id == User::current()->getDegreeTypeID()) echo 'selected'; ?>><?php echo $type; ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -94,17 +114,26 @@ include "pages/banner.php"; ?>
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2" style="padding-bottom: 2em">
 				<label for="usergender">Gender</label>
-				<input class="form-control" type="text" id="usergender" name="gender" required>
+				<input class="form-control" type="text" id="usergender" name="gender" value="<?php echo User::current()->getGender(); ?>" required>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-3 col-md-offset-2">
+			<div class="col-md-4 col-md-offset-2" style="padding-top: 0;">
+				<label for="userpass">Change Password</label>
+				<input class="form-control" type="password" id="userpass" name="password">
+			</div>
+			<div class="col-md-4" style="padding-top: 0;">
+				<label for="userpass2">Confirm Password</label>
+				<input class="form-control" type="password" id="userpass2" name="password2">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2" style="text-align: center">
 				<input type="hidden" name="settingsSubmit">
 				<button type="submit" class="btn register-btn">Save Changes</button>
-			</div>
-			<div class="col-md-3">
-				<button name="cancelMembership" class="btn register-btn">Cancel Membership</button>
+				<a href="#" class="btn btn-danger">Cancel Membership</a>
 			</div>
 		</div>
 	</form>

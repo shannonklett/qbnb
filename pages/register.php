@@ -82,8 +82,8 @@ include "pages/banner.php"; ?>
 				<input class="form-control" type="password" id="userpass" name="password" required>
 			</div>
 			<div class="col-md-4" style="padding-top: 0;">
-				<label for="userpass">Confirm Password</label>
-				<input class="form-control" type="password" id="userpass" name="password" required>
+				<label for="userpass2">Confirm Password</label>
+				<input class="form-control" type="password" id="userpass2" name="password2" required>
 			</div>
 		</div>
 

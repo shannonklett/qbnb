@@ -83,7 +83,7 @@ class Booking {
 		}
 		try {
 			$pdo  = DB::getHandle();
-			$stmt = $pdo->prepare("SELECT * FROM bookings WHERE consumer_id = :consumer_id");
+			$stmt = $pdo->prepare("SELECT * FROM bookings WHERE consumer_id = :consumer_id ORDER BY start_date ASC");
 			$stmt->bindParam(":consumer_id", $consumerID);
 			$stmt->execute();
 			$results = $stmt->fetchAll();
@@ -112,7 +112,7 @@ class Booking {
 		}
 		try {
 			$pdo  = DB::getHandle();
-			$stmt = $pdo->prepare("SELECT * FROM bookings WHERE property_id = :property_id");
+			$stmt = $pdo->prepare("SELECT * FROM bookings WHERE property_id = :property_id ORDER BY start_date ASC");
 			$stmt->bindParam(":property_id", $propertyID);
 			$stmt->execute();
 			$results = $stmt->fetchAll();
@@ -136,7 +136,7 @@ class Booking {
 	public static function getAll() {
 		try {
 			$pdo  = DB::getHandle();
-			$stmt = $pdo->query("SELECT * FROM bookings");
+			$stmt = $pdo->query("SELECT * FROM bookings ORDER BY start_date ASC");
 			$results = $stmt->fetchAll();
 			if ($results === false) {
 				return [];

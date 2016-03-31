@@ -11,7 +11,7 @@ include "pages/banner.php"; ?>
 
 <div class="huge-padding"></div>
 
-<div class="contrainer">
+<div class="container">
 <div class="row">
     <ul id="myTabs" class="nav nav-tabs nav-justified" role="tablist">
         <li role="presentation" class="active"><a href="#users" id="users-tab" role="tab" data-toggle="tab" aria-controls="users" aria-expanded="true">System Users</a>
