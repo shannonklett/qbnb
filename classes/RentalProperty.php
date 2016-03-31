@@ -361,6 +361,7 @@ class RentalProperty {
 			$stmt->execute();
 
 			$pdo->commit();
+			$this->setImage(false);
 			return true;
 		} catch (PDOException $e) {
 			return false;
@@ -633,6 +634,18 @@ class RentalProperty {
 		$this->hasPool             = $features["has_pool"]              ? 1 : 0;
 		$this->hasTransportAccess  = $features["has_transport_access"]  ? 1 : 0;
 		$this->hasPrivateBathroom  = $features["has_private_bathroom"]  ? 1 : 0;
+	}
+
+	private static $imageMaxSize = 4194304;    // 4 MB
+	private static $imageDirectory = "property_images";
+	private static $imageTypesList = array("SVG", "PNG", "JPG");
+
+	public function getImage() {
+		return FileReadWrite::readImage(self::$imageDirectory, $this->id);
+	}
+
+	public function setImage($file) {
+		return FileReadWrite::writeImage($file, self::$imageDirectory, $this->id, self::$imageMaxSize);
 	}
 
 }

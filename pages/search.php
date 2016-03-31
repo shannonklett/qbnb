@@ -87,7 +87,7 @@ include "pages/header.php"; ?>
 		$text =
 			'<div class="col-sm-6">
 				<a class="property-block" href="./?property=' . $property->getID() . '" style="display: block; color: inherit">
-					<img class="property-pic" src="qbnb_website/images/property_1.jpg">
+					<img class="property-pic" src="' . $property->getImage() . '">
 					<span class="property-info" style="display: block">
 						<span class="property-title">' . $property->getName() . '</span>
 						<span class="property-address">' . $property->getAddress() . '</span>
@@ -130,6 +130,8 @@ include "pages/header.php"; ?>
 
 		?>
 	</div>
+
+	<div class="huge-padding"></div>
 
 <?php
 

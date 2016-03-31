@@ -11,8 +11,12 @@ include "pages/banner.php"; ?>
 
 <?php include "pages/_supplierbookings.php"; ?>
 
+<div class="small-padding"></div>
+
 <h3 style="text-align: center; margin-bottom: 1em">My Bookings</h3>
 
-<?php include "pages/_consumerbookings.php";
+<?php include "pages/_consumerbookings.php"; ?>
 
-include "pages/footer.php";
+<div class="huge-padding"></div>
+
+<?php include "pages/footer.php";

@@ -43,6 +43,11 @@ if (isset($_POST["propertyEditSubmit"])) {
 		$property->setFeatures($features);
 		$success = $property->update();
 		if ($success) {
+			if (isset($_FILES["image"]) && $_FILES["image"]["size"] > 0) {
+				try {
+					$success = $property->setImage($_FILES["image"]);
+				} catch (Exception $e) {}
+			}
 			Session::redirect("./?property=" . $property->getID());
 		}
 	}
@@ -60,7 +65,7 @@ include "pages/banner.php";
 
     <div class="container">
 
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
 
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
@@ -115,6 +120,12 @@ include "pages/banner.php";
           <div class="col-md-6 col-md-offset-3"><label for="propertydesc">Description</label>
             <textarea class="form-control" id="propertydesc" name="description" required rows="10"><?php echo $property->getDescription(); ?></textarea>
           </div>
+        </div>
+
+        <div class="row">
+	        <div class="col-md-6 col-md-offset-3"><label for="image">Replace Preview Image</label>
+		        <input type="file" name="image" id="image" style="margin-bottom: 3em;">
+	        </div>
         </div>
 
         <div class="row">

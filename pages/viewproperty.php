@@ -99,7 +99,12 @@ include "pages/banner.php";
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <img class="info-property-pic" width="100%" src="qbnb_website/images/property_1.jpg">
+	        <?php if ($property->getImage()) { ?>
+		        <img class="info-property-pic" width="100%" src="<?php echo $property->getImage(); ?>">
+	        <?php } else { ?>
+		        <img class="info-property-pic" width="100%" src="qbnb_website/images/property_1.jpg">
+	        <?php } ?>
+
             <div class="info-property-price">$
                 <?php echo $property->getPrice(); ?>.00</div>
         </div>

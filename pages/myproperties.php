@@ -3,8 +3,12 @@
 include "pages/header.php";
 
 $bannerText = "My Properties";
-include "pages/banner.php";
+include "pages/banner.php"; ?>
 
-include "pages/_myproperties.php";
+<div class="huge-padding"></div>
 
-include "pages/footer.php";
+<?php include "pages/_myproperties.php"; ?>
+
+<div class="huge-padding"></div>
+
+<?php include "pages/footer.php";
