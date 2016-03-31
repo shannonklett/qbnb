@@ -133,7 +133,7 @@ include "pages/banner.php"; ?>
 			<div class="col-md-8 col-md-offset-2" style="text-align: center">
 				<input type="hidden" name="settingsSubmit">
 				<button type="submit" class="btn register-btn">Save Changes</button>
-				<a href="#" class="btn btn-danger">Cancel Membership</a>
+				<a href="./?deleteuser=<?php echo User::current()->getID(); ?>" class="btn btn-danger">Cancel Membership</a>
 			</div>
 		</div>
 	</form>

@@ -11,6 +11,13 @@ try {
     Session::redirect("./");
 }
 
+if (isset($_POST["bookingAddSubmit"])) {
+
+	$booking = new Booking(User::current()->getID(), $property->getID(), DateTime::createFromFormat(Format::MYSQL_DATE_FORMAT, $_POST["startdate"]), DateTime::createFromFormat(Format::MYSQL_DATE_FORMAT, $_POST["enddate"]), 1);
+	$success = $booking->insert();
+
+}
+
 $features = $property->getFeatures();
 
 include "pages/header.php";
@@ -192,8 +199,6 @@ include "pages/banner.php";
         </div>
     </div>
 
-	<?php if (User::current()->getID() !== $property->getSupplierID()) { ?>
-
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="info-property-type">
@@ -201,9 +206,7 @@ include "pages/banner.php";
 						<thead>
 
 						<tr>
-							<th><span class="prop-info-color">Current Bookings</span>
-							</th>
-							<th></th>
+							<th><span class="prop-info-color">Current Bookings</span></th>
 							<th></th>
 						</tr>
 
@@ -228,16 +231,25 @@ include "pages/banner.php";
 			</div>
 		</div>
 
+	<?php if (User::current()->getID() !== $property->getSupplierID()) { ?>
+
 		<div class="row">
-			<div class="col-md-2 no-spacer-form-right col-md-offset-3">
-				<input type="date" class="form-control" placeholder="A" required>
-			</div>
-			<div class="col-md-2 no-spacer-form">
-				<input type="date" class="form-control" placeholder="D" required>
-			</div>
-			<div class="col-md-2 no-spacer-form-left">
-				<button class="btn btn-default book-button btn-search" type="button">BOOK</button>
-			</div>
+			<form action="" method="post">
+				<div class="col-md-2 no-spacer-form-right col-md-offset-3">
+					<?php
+					$now = new DateTime();
+					$now = $now->format(Format::MYSQL_DATE_FORMAT);
+					?>
+					<input type="date" value="<?php echo $now; ?>" name="startdate" class="form-control" placeholder="A" required>
+				</div>
+				<div class="col-md-2 no-spacer-form">
+					<input type="date" value="<?php echo $now; ?>" name="enddate" class="form-control" placeholder="D" required>
+				</div>
+				<div class="col-md-2 no-spacer-form-left">
+					<input type="hidden" name="bookingAddSubmit">
+					<button class="btn btn-default book-button btn-search" type="submit">BOOK</button>
+				</div>
+			</form>
 		</div>
 
 	<?php } ?>

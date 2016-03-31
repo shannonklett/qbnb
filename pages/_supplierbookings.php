@@ -26,22 +26,26 @@
 			<thead>
 			<tr>
 				<th>Property Name</th>
-				<th>Property Owner</th>
+				<th>Booked By</th>
 				<th>Start Date</th>
 				<th>End Date</th>
 				<th>Status</th>
-				<th></th>
+				<th>Confirm/Reject</th>
 			</tr>
 			</thead>
 			<tbody>
 			<?php foreach ($bookings as $booking) { ?>
 				<tr>
 					<td><a href="./?property=<?php echo $property->getID(); ?>"><?php echo $property->getName(); ?></a></td>
-					<td><?php echo $property->getSupplier()->getFullName(); ?></td>
+					<td><?php echo $booking->getConsumer()->getFullName(); ?></td>
 					<td><?php echo $booking->getStartDate()->format(Format::DATE_FORMAT); ?></td>
 					<td><?php echo $booking->getEndDate()->format(Format::DATE_FORMAT); ?></td>
 					<td><?php echo $booking->getStatus(); ?></td>
-					<td></td>
+					<td>
+					<?php if ($booking->getStatusID() == 1) { ?>
+						<a class="font-green" href="./?property=<?php echo $property->getID(); ?>&confirmbooking=<?php echo $booking->getID(); ?>"><i class="fa fa-check"></i></a> <a class="font-red" href="./?property=<?php echo $property->getID(); ?>&rejectbooking=<?php echo $booking->getID(); ?>"><i class="fa fa-times"></i></a>
+					<?php } ?>
+					</td>
 				</tr>
 			<?php } ?>
 			</tbody>

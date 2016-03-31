@@ -34,6 +34,21 @@ if (isset($_GET["addproperty"])) {
 	die();
 }
 
+if (isset($_GET["confirmbooking"])) {
+	include "pages/confirmbooking.php";
+	die();
+}
+
+if (isset($_GET["rejectbooking"])) {
+	include "pages/rejectbooking.php";
+	die();
+}
+
+if (isset($_GET["cancelbooking"])) {
+	include "pages/cancelbooking.php";
+	die();
+}
+
 if (isset($_GET["property"])) {
 
 	if (isset($_GET["edit"])) {
@@ -52,6 +67,11 @@ if (isset($_GET["property"])) {
 
 if (isset($_GET["myproperties"])) {
 	include "pages/myproperties.php";
+	die();
+}
+
+if (isset($_GET["deleteuser"])) {
+	include "pages/deleteuser.php";
 	die();
 }
 
