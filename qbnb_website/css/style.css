@@ -443,10 +443,10 @@ input[type="date"]:valid:before {
 .property-address {
     font-family: "Ubuntu";
     font-weight: 300;
-    font-size: 15px;
+    font-size: 13px;
     position: absolute;
     left: 225px;
-    top: 87px;
+    top: 89px;
 }
 
 .property-type {
