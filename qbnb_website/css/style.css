@@ -326,6 +326,7 @@ input[type="date"]:before {
     content: attr(placeholder) !important;
     color: #aaa;
     margin-right: 0.5em;
+    font-weight: 700;
 }
 
 input[type="checkbox"]:focus {
@@ -374,6 +375,30 @@ input[type="date"]:valid:before {
     top: 185px;
     left: 490px;
 }
+
+.prop-info-color {
+    color: #2aac95;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.no-spacer-form {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.no-spacer-form-right {
+    padding-right: 0px;
+}
+
+.no-spacer-form-left {
+    padding-left: 0px;
+}
+
+.book-button {
+    width: 100%;
+}
+
 
 .remove-prop-icon {
     position: absolute;
