@@ -73,9 +73,9 @@ class User {
 	 */
 	public static function current() {
 		if (is_null(self::$currentUser)) {
-			// TODO make sure this is a real variable
-			if (isset($_SESSION['user_id'])) {
-				self::$currentUser = self::withID($_SESSION['user_id']);
+			Session::start();
+			if ($_SESSION["user_id"]) {
+				self::$currentUser = self::withID($_SESSION["user_id"]);
 			}
 		}
 		return self::$currentUser;
@@ -238,7 +238,6 @@ class User {
 			$stmt->bindParam(":first_name", $firstName);
 			$stmt->bindParam(":last_name", $lastName);
 			$stmt->bindParam(":email", $email);
-			$stmt->bindParam(":password", $hashPass);
 			$stmt->bindParam(":phone_number", $phoneNumber);
 			$stmt->bindParam(":grad_year", $gradYear);
 			$stmt->bindParam(":faculty_id", $facultyID);
@@ -407,10 +406,53 @@ class User {
 	 * @param string $email
 	 */
 	public function setEmail($email) {
+		if ($email == $this->email) {
+			return;
+		}
 		if (!Validate::email($email)) {
 			throw new InvalidArgumentException("Invalid email address supplied to setEmail.");
 		}
+		if (!User::emailAvailable($email)) {
+			throw new InvalidArgumentException("The email address supplied to setEmail is already taken.");
+		}
 		$this->email = $email;
+	}
+
+	/**
+	 * @param string $email
+	 *
+	 * @return bool
+	 */
+	public static function emailAvailable($email) {
+		try {
+			$pdo = DB::getHandle();
+			$stmt = $pdo->prepare("SELECT 1 FROM users WHERE email = :email");
+			$stmt->bindParam(":email", $email);
+			$stmt->execute();
+			$result = $stmt->fetch();
+			return ($result === false);
+		} catch (PDOException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * @param string $password
+	 *
+	 * @return bool
+	 */
+	public function setPassword($password) {
+		$hashPass = password_hash($password, PASSWORD_DEFAULT, ["cost" => 12]);
+		try {
+			$pdo = DB::getHandle();
+			$stmt = $pdo->prepare("UPDATE users SET password = :password WHERE id = :id");
+			$stmt->bindParam(":password", $hashPass);
+			$stmt->bindParam(":id", $this->id);
+			$stmt->execute();
+			return true;
+		} catch (PDOException $e) {
+			return false;
+		}
 	}
 
 	/**
