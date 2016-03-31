@@ -125,15 +125,15 @@ include "pages/banner.php";
         <div class="row">
 
           <div class="col-md-2 col-md-offset-3"><label for="featuresairconditioning">I have air conditioning</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featuresairconditioning" name="airconditioning" <?php if ($features["has_air_conditioning"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featuresairconditioning" name="airconditioning" <?php if ($features["has_air_conditioning"]) echo 'checked'; ?>>
           </div>
 
           <div class="col-md-2"><label for="featurescabletv">I have cable tv</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featurescabletv" name="cabletv" <?php if ($features["has_cable_tv"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featurescabletv" name="cabletv" <?php if ($features["has_cable_tv"]) echo 'checked'; ?>>
           </div>
 
           <div class="col-md-2"><label for="featureslaundrymachines">I have laundry machines</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featureslaundrymachines" name="laundrymachines" <?php if ($features["has_laundry_machines"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featureslaundrymachines" name="laundrymachines" <?php if ($features["has_laundry_machines"]) echo 'checked'; ?>>
           </div>
 
         </div>
@@ -141,15 +141,15 @@ include "pages/banner.php";
         <div class="row">
         
           <div class="col-md-2 col-md-offset-3"><label for="featuresparking">I have parking</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featuresparking" name="parking" <?php if ($features["has_parking"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featuresparking" name="parking" <?php if ($features["has_parking"]) echo 'checked'; ?>>
           </div>
 
           <div class="col-md-2"><label for="featuresgym">I have a gym</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featuresgym" name="gym" <?php if ($features["has_gym"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featuresgym" name="gym" <?php if ($features["has_gym"]) echo 'checked'; ?>>
           </div>
 
           <div class="col-md-2"><label for="featuresinternet">I have internet</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featuresinternet" name="internet" <?php if ($features["has_internet"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featuresinternet" name="internet" <?php if ($features["has_internet"]) echo 'checked'; ?>>
           </div>
 
         </div>
@@ -157,15 +157,15 @@ include "pages/banner.php";
         <div class="row">
         
           <div class="col-md-2 col-md-offset-3"><label for="featurespets">I allow pets</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featurespets" name="pets" <?php if ($features["pets_allowed"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featurespets" name="pets" <?php if ($features["pets_allowed"]) echo 'checked'; ?>>
           </div>
 
           <div class="col-md-2"><label for="featureswheelchairaccess">I have wheelchair access</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featureswheelchairaccess" name="wheelchairaccess" <?php if ($features["has_wheelchair_access"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featureswheelchairaccess" name="wheelchairaccess" <?php if ($features["has_wheelchair_access"]) echo 'checked'; ?>>
           </div>
 
           <div class="col-md-2"><label for="featurespool">I have a pool</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featurespool" name="pool" <?php if ($features["has_pool"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featurespool" name="pool" <?php if ($features["has_pool"]) echo 'checked'; ?>>
           </div>
 
         </div>
@@ -173,18 +173,18 @@ include "pages/banner.php";
         <div class="row">
         
           <div class="col-md-2 col-md-offset-3"><label for="featurestransportaccess">I have access to transport</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featurestransportaccess" name="transportaccess" <?php if ($features["has_transport_access"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featurestransportaccess" name="transportaccess" <?php if ($features["has_transport_access"]) echo 'checked'; ?>>
           </div>
 
           <div class="col-md-2"><label for="featuresprivatebathroom">I have a private bathroom</label>
-            <input class="form-control bottom-mar" type="checkbox" id="featuresprivatebathroom" name="privatebathroom" <?php if ($features["has_private_bathroom"]) echo 'checked'; ?>>
+            <input class="form-control bottom-mar no-check" type="checkbox" id="featuresprivatebathroom" name="privatebathroom" <?php if ($features["has_private_bathroom"]) echo 'checked'; ?>>
           </div>
 
 
         </div>
 
         <div class="row">
-        
+
         	<input type="hidden" name="propertyEditSubmit">
         	<div class="col-md-3 col-md-offset-5"><input class="btn register-btn" type="submit" value="Submit"></div>
 
