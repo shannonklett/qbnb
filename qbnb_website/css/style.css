@@ -138,8 +138,48 @@ h2 {
     color: #d13737;
 }
 
+.small-padding {
+    padding: 15px;
+}
+
+.font-white{
+    color: #fff;
+}
+
+.panel-icon-1 {
+    position: absolute;
+    right: 26px;
+    top: 9px;
+}
+
+.panel-icon-2 {
+    cursor: pointer;
+    position: absolute;
+    right: 52px;
+    top: 10px;
+}
+
 .font-green {
     color: #8ac247;
+}
+
+.panel-primary {
+  border-color: #2aac95;
+}
+.panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #2aac95;
+  border-color: #2aac95;
+}
+.panel-primary > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #2aac95;
+}
+.panel-primary > .panel-heading .badge {
+  color: #2aac95;
+  background-color: #fff;
+}
+.panel-primary > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #2aac95;
 }
 
 .col-md-3,
@@ -422,6 +462,18 @@ input[type="date"]:valid:before {
     left: 273px;
     top: 95px;
     color: #999999;
+}
+
+.close {
+    opacity: 1!important;
+}
+
+.lil-margin-top {
+    margin-top: 10px;
+}
+
+.top-pad {
+    margin-top: 30px;
 }
 
 .info-property-pic-div {

@@ -209,7 +209,65 @@
       </div>
   </div>
 
+  <div class="small-padding"></div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-primary"> 
+        <div class=panel-heading> 
+            <h3 class="panel-title">(4/5) Review by <strong>USERNAME</strong></h3> 
+            <a class="font-red panel-icon-1" href="#"><i class="fa fa-times"></i></a> 
+            <a class="font-white panel-icon-2" href="#"><i class="fa fa-reply"></i></a>
+        </div> 
+        <div id="review1">
+        <div class=panel-body> 
+            What a lovely place. Truly a paradise! Would definitely love to come back when I visit LA again. And Lauren is such a wonderful host!
+            <div class="alert alert-info top-pad" role="alert"> <a class="font-red close" href="#"><i class="fa fa-times"></i></a> <strong>Reply:</strong> Thank you!</div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-primary"> 
+        <div class=panel-heading> 
+            <h3 class="panel-title">(4/5) Review by <strong>USERNAME</strong></h3> 
+            <a class="font-red panel-icon-1" href="#"><i class="fa fa-times"></i></a> 
+            <a class="font-white panel-icon-2" onclick="myFunction('review2')"><i class="fa fa-reply"></i></a>
+        </div> 
+        <div class=panel-body> 
+            What a lovely place. Truly a paradise! Would definitely love to come back when I visit LA again. And Lauren is such a wonderful host!
+            <div id="review2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3"><label for="commentreview">Write a review</label>
+      <textarea class="form-control" id="commentreview" name="review" required rows="5"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3"><strong>Rate Property</strong><br>
+    <label class="radio-inline"><input type="radio" name="optradio">1</label>
+    <label class="radio-inline"><input type="radio" name="optradio">2</label>
+    <label class="radio-inline"><input type="radio" name="optradio">3</label>
+    <label class="radio-inline"><input type="radio" name="optradio">4</label>
+    <label class="radio-inline"><input type="radio" name="optradio">5</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-md-offset-5"><input class="btn lil-margin-top register-btn" type="submit" value="Submit"></div>
+  </div>
+
+
 </div>
+
+
 
 <div class="huge-padding"></div>
 
@@ -218,6 +276,12 @@
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/parallax.js"></script>
+
+<script>
+function myFunction(id) {
+    document.getElementById(id).innerHTML = "<textarea class='form-control top-pad' id='reply' name='userreply' rows='2'></textarea><input class='btn register-btn' type='submit' value='Reply'>";
+}
+</script>
 </body>
 
 </html>
