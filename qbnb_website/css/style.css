@@ -357,6 +357,16 @@ input[type="date"]:valid:before {
     color: #999999;
 }
 
+.pencil-icon {
+    color: #495356;
+    font-size: 25px;
+}
+
+.remove-icon {
+    color: #d13737;
+    font-size: 25px;
+}
+
 .pencil-prop-icon {
     position: absolute;
     color: #495356;

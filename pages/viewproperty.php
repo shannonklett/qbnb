@@ -26,6 +26,8 @@ include "pages/banner.php";
     <div class="col-md-6 col-md-offset-3">
       <img class="info-property-pic" width="100%" src="images/property_1.jpg">
       <div class="info-property-price"><?php echo $property->getPrice(); ?></div>
+      <a class="pencil-icon" href=""><i class="fa fa-pencil"></i></a>
+      <a class="remove-icon" href=""><i class="fa fa-times"></i></a>
     </div>
   </div>
 
