@@ -44,8 +44,6 @@ if (isset($_POST["searchSubmit"])) {
 	if ($maxPrice !== false) {
 		$selectedPrice = $maxPrice;
 	}
-	echo "<br><br>";
-	var_dump($maxPrice);
 
 	$results = RentalProperty::search($selectedDistrict, $selectedType, $feature, $maxPrice);
 
