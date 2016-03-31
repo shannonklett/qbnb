@@ -90,7 +90,7 @@ include "pages/banner.php"; ?>
 		<div class="row">
 			<div class="col-md-2 col-md-offset-2" style="padding-top: 0;">
 				<label for="gradyear">Graduation Year</label>
-				<input class="form-control" type="number" id="gradyear" name="graduation" value="2016" required>
+				<input class="form-control" type="number" id="gradyear" name="graduation" value="<?php $now = new DateTime(); echo $now->format("Y"); ?>" required>
 			</div>
 			<div class="col-md-4" style="padding-top: 0;">
 				<label for="userfaculty">Faculty</label>
