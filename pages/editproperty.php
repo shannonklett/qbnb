@@ -180,7 +180,7 @@ include "pages/banner.php";
         <div class="row">
         
         	<input type="hidden" name="propertyEditSubmit">
-        	<div class="col-md-3 col-md-offset-5"><button class="btn register-btn" type="submit">Submit</button></div>
+        	<div class="col-md-3 col-md-offset-5"><button class="btn register-btn" type="submit">Save Changes</button></div>
 
         </div>
 
