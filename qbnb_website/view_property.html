@@ -51,7 +51,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <img class="info-property-pic" width="100%" src="images/property_1.jpg">
-      <div class="info-property-price">$99.00</div>
+      <div class="info-property-price"><?php echo $property->getPrice(); ?></div>
     </div>
   </div>
 
@@ -59,20 +59,19 @@
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <div class="info-property-title form-group">Private Room in Venice Beach</div>
+      <div class="info-property-title form-group"><?php echo $property->getName(); ?></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <div class="info-property-subtitle form-group">1708 Linden Ave, Venice, CA 90291, USA</div>
+      <div class="info-property-subtitle form-group"><?php echo $property->getAddress(); ?></div>
     </div>
   </div>
 
     <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <p class="property-description form-group">
-Located in exclusive Beverly Hills, just steps from Rodeo Dr, this beautiful studio puts you in the heart of the luxury capital of the world! Originally built as a hotel 1924, this historic property has hosted some of Hollywood's brightest stars.</p>
+      <p class="property-description form-group"><?php echo $property->getDescription(); ?></p>
     </div>
   </div>
 
@@ -83,67 +82,67 @@ Located in exclusive Beverly Hills, just steps from Rodeo Dr, this beautiful stu
           <tbody>
             <tr>
               <td><strong>Property District</strong></td>
-              <td>Bel-Air</td>
+              <td><?php echo $property->getDistrictID(); ?></td>
             </tr>
             <tr>
               <td><strong>Property Type</strong></td>
-              <td>type</td>
+              <td><?php echo $property->getPropertyTypeID(); ?></td>
             </tr>
             <tr>
               <td><strong>Max Guests</strong></td>
-              <td>5</td>
+              <td><?php echo $property->getNumGuests(); ?></td>
             </tr>
             <tr>
               <td><strong>Number of Rooms</strong></td>
-              <td>3</td>
+              <td><?php echo $property->getNumRooms(); ?></td>
             </tr>
             <tr>
               <td><strong>Number of Bathrooms</strong></td>
-              <td>2</td>
+              <td><?php echo $property->getNumBathrooms(); ?></td>
             </tr>
             <tr>
               <td><strong>I have air conditioning</strong></td>
-              <td>No</td>
+              <td><?php echo ($features["has_air_conditioning"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have cable tv</strong></td>
-              <td>No</td>
+              <td><?php echo ($features["has_cable_tv"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have laundry machines</strong></td>
-              <td>Yes</td>
+              <td><?php echo ($features["has_laundry_machines"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have parking</strong></td>
-              <td>No</td>
+              <td><?php echo ($features["has_parking"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have a gym</strong></td>
-              <td>No</td>
+              <td><?php echo ($features["has_gym"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have internet</strong></td>
-              <td>Yes</td>
+              <td><?php echo ($features["has_internet"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I allow pets</strong></td>
-              <td>Yes</td>
+              <td><?php echo ($features["pets_allowed"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have wheelchair access</strong></td>
-              <td>No</td>
+              <td><?php echo ($features["has_wheelchair_access"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have a pool</strong></td>
-              <td>Yes</td>
+              <td><?php echo ($features["has_pool"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have access to transport</strong></td>
-              <td>Yes</td>
+              <td><?php echo ($features["has_transport_access"]) ? 'Yes' : 'No'; ?></td>
             </tr>
             <tr>
               <td><strong>I have a private bathroom</strong></td>
-              <td>No</td>
+              <td><?php echo ($features["has_private_bathroom"]) ? 'Yes' : 'No'; ?></td>
             </tr>
 
           </tbody>
