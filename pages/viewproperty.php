@@ -1,15 +1,14 @@
 <?php
 
 if (!isset($_GET["property"]) || !Validate::int($_GET["property"])) {
-  Session::redirect("./");
+    Session::redirect("./");
 }
 
 $property = (int) $_GET["property"];
-
 try {
-  $property = RentalProperty::withID($property);
+    $property = RentalProperty::withID($property);
 } catch (Exception $e) {
-  Session::redirect("./");
+    Session::redirect("./");
 }
 
 $features = $property->getFeatures();
@@ -17,7 +16,6 @@ $features = $property->getFeatures();
 include "pages/header.php";
 
 $bannerText = "Property Details";
-
 include "pages/banner.php";
 
 ?>
