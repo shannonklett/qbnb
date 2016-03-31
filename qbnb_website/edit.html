@@ -50,17 +50,25 @@
         </div>
     </div>
 
+    <div class="huge-padding"></div>
+
     <div class="container">
 
         <form action="action_page.php">
-            <label for="pname">Property Name</label>
-            <input type="text" id="pname" name="propertyname" required>
 
-            <label for="address">Property Address</label>
-            <input type="text" id="address" name="propertyaddress" required>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="pname">Property Name</label>
+          <input class="form-control" type="text" id="pname" name="propertyname" required></div>
+        </div>
 
-            <label for="district">Property District</label>
-            <select name="propertydistrict" id="district">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="address">Property Address</label>
+          <input class="form-control" type="text" id="address" name="propertyaddress" required></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="district">Property District</label>
+            <select class="form-control select-search-form" name="propertydistrict" id="district">
                 <option value="1">Bel-Air</option>
                 <option value="2">Santa Monica</option>
                 <option value="3">Beverly Crest</option>
@@ -82,52 +90,117 @@
                 <option value="19">Pacific Palisades</option>
                 <option value="20">Playa Vista</option>
             </select>
+          </div>
+        </div>
 
-            <label for="propertytype">Property Type</label>
-            <select name="type" id="propertytype">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="propertytype">Property Type</label>
+            <select class="form-control select-search-form" name="type" id="propertytype">
                 <option value="1"></option>
             </select>
+          </div>
+        </div>
 
-            <label for="numguest">Number of Guest</label>
-            <input type="number" id="numguest" name="numberofguest" required>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="numguest">Number of Guest</label>
+            <input class="form-control" type="number" id="numguest" name="numberofguest" required>
+          </div>
+        </div>
 
-            <label for="numroom">Number of Room</label>
-            <input type="number" id="numroom" name="numberofroom" required>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="numroom">Number of Room</label>
+            <input class="form-control" type="number" id="numroom" name="numberofroom" required>
+          </div>
+        </div>
 
-            <label for="numbathroom">Number of Bathrooms</label>
-            <input type="number" id="numbathroom" name="numberofbathroom" required>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="numbathroom">Number of Bathrooms</label>
+            <input class="form-control" type="number" id="numbathroom" name="numberofbathroom" required>
+          </div>
+        </div>
 
-            <label for="propertyprice">Property Price</label>
-            <input type="number" id="propertyprice" name="price" required>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="propertyprice">Property Price</label>
+            <input class="form-control" type="number" id="propertyprice" name="price" required>
+          </div>
+        </div>
 
-            <label for="propertydesc">Description</label>
-            <textarea id="propertydesc" name="description" required cols="50" rows="10"></textarea>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3"><label for="propertydesc">Description</label>
+            <textarea class="form-control" id="propertydesc" name="description" required rows="10"></textarea>
+          </div>
+        </div>
 
-            <label for="featuresairconditioning">I have air conditioning</label>
-              <input type="checkbox" id="featuresairconditioning" name="propertyfeatures" value="airconditioning">
-            <label for="featurescabletv">I have cable tv</label>
-              <input type="checkbox" id="featurescabletv" name="propertyfeatures" value="cabletv">
-            <label for="featureslaundrymachines">I have laundry machines</label>
-              <input type="checkbox" id="featureslaundrymachines" name="propertyfeatures" value="laundrymachines">
-            <label for="featuresparking">I have parking</label>
-              <input type="checkbox" id="featuresparking" name="propertyfeatures" value="parking">
-            <label for="featuresgym">I have a gym</label>
-              <input type="checkbox" id="featuresgym" name="propertyfeatures" value="gym">
-            <label for="featuresinternet">I have a internet</label>
-              <input type="checkbox" id="featuresinternet" name="propertyfeatures" value="internet">
-            <label for="featurespets">I allow pets</label>
-              <input type="checkbox" id="featurespets" name="propertyfeatures" value="pets">
-            <label for="featureswheelchairaccess">I have wheelchair access</label>
-              <input type="checkbox" id="featureswheelchairaccess" name="propertyfeatures" value="wheelchairaccess">
-            <label for="featurespool">I have a pool</label>
-              <input type="checkbox" id="featurespool" name="propertyfeatures" value="pool">
-            <label for="featurestransportaccess">I have access to transport</label>
-              <input type="checkbox" id="featurestransportaccess" name="propertyfeatures" value="transportaccess">
-            <label for="featuresprivatebathroom">I have a private bathroom</label>
-              <input type="checkbox" id="featuresprivatebathroom" name="propertyfeatures" value="privatebathroom">
+        <div class="row">
 
-            <input type="submit" value="Submit">
+          <div class="col-md-2 col-md-offset-3"><label for="featuresairconditioning">I have air conditioning</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featuresairconditioning" name="propertyfeatures" value="airconditioning">
+          </div>
+
+          <div class="col-md-2"><label for="featurescabletv">I have cable tv</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featurescabletv" name="propertyfeatures" value="cabletv">
+          </div>
+
+          <div class="col-md-2"><label for="featureslaundrymachines">I have laundry machines</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featureslaundrymachines" name="propertyfeatures" value="laundrymachines">
+          </div>
+
+        </div>
+
+        <div class="row">
+        
+          <div class="col-md-2 col-md-offset-3"><label for="featuresparking">I have parking</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featuresparking" name="propertyfeatures" value="parking">
+          </div>
+
+          <div class="col-md-2"><label for="featuresgym">I have a gym</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featuresgym" name="propertyfeatures" value="gym">
+          </div>
+
+          <div class="col-md-2"><label for="featuresinternet">I have internet</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featuresinternet" name="propertyfeatures" value="internet">
+          </div>
+
+        </div>
+
+        <div class="row">
+        
+          <div class="col-md-2 col-md-offset-3"><label for="featurespets">I allow pets</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featurespets" name="propertyfeatures" value="pets">
+          </div>
+
+          <div class="col-md-2"><label for="featureswheelchairaccess">I have wheelchair access</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featureswheelchairaccess" name="propertyfeatures" value="wheelchairaccess">
+          </div>
+
+          <div class="col-md-2"><label for="featurespool">I have a pool</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featurespool" name="propertyfeatures" value="pool">
+          </div>
+
+        </div>
+
+        <div class="row">
+        
+          <div class="col-md-2 col-md-offset-3"><label for="featurestransportaccess">I have access to transport</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featurestransportaccess" name="propertyfeatures" value="transportaccess">
+          </div>
+
+          <div class="col-md-2"><label for="featuresprivatebathroom">I have a private bathroom</label>
+            <input class="form-control bottom-mar" type="checkbox" id="featuresprivatebathroom" name="propertyfeatures" value="privatebathroom">
+          </div>
+
+
+        </div>
+
+        <div class="row">
+        
+          <div class="col-md-3 col-md-offset-5"><input class="btn register-btn" type="submit" value="Submit"></div>
+
+        </div>
+
         </form>
+
+        <div class="huge-padding"></div>
 
     </div>
 

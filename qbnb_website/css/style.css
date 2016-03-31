@@ -258,13 +258,24 @@ h2 {
     height: 14em;
 }
 
+.huge-padding {
+    padding: 55px;
+}
+
+textarea,
+.bottom-mar {
+    margin-bottom: 15px!important;
+}
+
 .select-search-form {
     border-radius: 0px;
     -webkit-appearance: none;
     background-image: url("../images/arrow_down.svg");
     background-repeat: no-repeat;
     background-size: 17px;
-    background-position: 220px 12px;
+    margin-right: 20px;
+    background-position: 97% 59%;
+    margin-bottom: 15px;
 }
 
 .search-header {
