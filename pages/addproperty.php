@@ -115,19 +115,19 @@ include "pages/banner.php";
 
 		<div class="row">
 			<div class="col-md-2 col-md-offset-3"><label for="numguest">Max Guests</label>
-				<input class="form-control" type="number" id="numguest" name="numberofguest" value="<?php echo $data["numberofguest"]; ?>" required>
+				<input class="form-control" type="number" min="1" id="numguest" name="numberofguest" value="<?php echo $data["numberofguest"]; ?>" required>
 			</div>
 			<div class="col-md-2"><label for="numroom">Number of Rooms</label>
-				<input class="form-control" type="number" id="numroom" name="numberofroom" value="<?php echo $data["numberofroom"]; ?>" required>
+				<input class="form-control" type="number" min="1" id="numroom" name="numberofroom" value="<?php echo $data["numberofroom"]; ?>" required>
 			</div>
 			<div class="col-md-2"><label for="numbathroom">Number of Bathrooms</label>
-				<input class="form-control" type="number" id="numbathroom" name="numberofbathroom" value="<?php echo $data["numberofbathroom"]; ?>" required>
+				<input class="form-control" type="number" min="0" id="numbathroom" name="numberofbathroom" value="<?php echo $data["numberofbathroom"]; ?>" required>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3"><label for="propertyprice">Property Price ($)</label>
-				<input class="form-control" type="number" id="propertyprice" name="price" required value="<?php echo $data["price"]; ?>">
+				<input class="form-control" type="number" min="0" id="propertyprice" name="price" required value="<?php echo $data["price"]; ?>">
 			</div>
 		</div>
 

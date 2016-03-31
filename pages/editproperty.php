@@ -35,6 +35,8 @@ if (isset($_POST["propertyEditSubmit"])) {
 
 		$property->setName($_POST["propertyname"]);
 		$property->setAddress($_POST["propertyaddress"]);
+		$property->setDistrictID($_POST["propertydistrict"]);
+		$property->setPropertyTypeID($_POST["type"]);
 		$property->setNumGuests($_POST["numberofguest"]);
 		$property->setNumRooms($_POST["numberofroom"]);
 		$property->setNumBathrooms($_POST["numberofbathroom"]);
@@ -100,19 +102,19 @@ include "pages/banner.php";
 
         <div class="row">
           <div class="col-md-2 col-md-offset-3"><label for="numguest">Max Guests</label>
-            <input class="form-control" type="number" id="numguest" name="numberofguest" value="<?php echo $property->getNumGuests(); ?>" required>
+            <input class="form-control" type="number" min="1" id="numguest" name="numberofguest" value="<?php echo $property->getNumGuests(); ?>" required>
           </div>
           <div class="col-md-2"><label for="numroom">Number of Rooms</label>
-            <input class="form-control" type="number" id="numroom" name="numberofroom" value="<?php echo $property->getNumRooms(); ?>" required>
+            <input class="form-control" type="number" min="1" id="numroom" name="numberofroom" value="<?php echo $property->getNumRooms(); ?>" required>
           </div>
           <div class="col-md-2"><label for="numbathroom">Number of Bathrooms</label>
-            <input class="form-control" type="number" id="numbathroom" name="numberofbathroom" value="<?php echo $property->getNumBathrooms(); ?>" required>
+            <input class="form-control" type="number" min="0" id="numbathroom" name="numberofbathroom" value="<?php echo $property->getNumBathrooms(); ?>" required>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6 col-md-offset-3"><label for="propertyprice">Property Price ($)</label>
-            <input class="form-control" type="number" id="propertyprice" name="price" required value="<?php echo $property->getPrice(); ?>">
+            <input class="form-control" type="number" min="0" id="propertyprice" name="price" required value="<?php echo $property->getPrice(); ?>">
           </div>
         </div>
 

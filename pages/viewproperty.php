@@ -334,7 +334,7 @@ include "pages/banner.php";
 				<div class="panel panel-primary">
 					<div class=panel-heading>
 						<h3 class="panel-title">(<?php echo $review->getRating() ?>/5) Review by <strong><?php echo $review->getConsumer()->getFirstName(); ?></strong></h3>
-						<?php if (User::current()->getID() == $property->getSupplierID()) { ?>
+						<?php if (User::current()->getID() == $property->getSupplierID() && $review->getReply() == "") { ?>
 							<a class="font-white panel-icon-2" href="./?property=<?php echo $property->getID(); ?>&reviewreply=<?php echo $review->getConsumerID(); ?>"><i class="fa fa-reply"></i></a>
 						<?php }
 						if (User::current()->isAdmin() || User::current()->getID() == $property->getSupplierID() || User::current()->getID() == $review->getConsumerID()) { ?>
@@ -359,7 +359,7 @@ include "pages/banner.php";
 			</div>
 		</div>
 
-		<?php if (isset($_GET["reviewreply"])) { ?>
+		<?php if (isset($_GET["reviewreply"]) && $_GET["reviewreply"] == $review->getConsumerID()) { ?>
 
 			<form action="" method="post">
 
@@ -371,7 +371,10 @@ include "pages/banner.php";
 				</div>
 				<div class="row">
 					<input type="hidden" name="reviewReplySubmit">
-					<div class="col-md-2 col-md-offset-5"><button class="btn lil-margin-top register-btn" type="submit">Reply</button></div>
+					<div class="col-md-12" style="text-align: center; margin-bottom: 2em;">
+						<button class="btn lil-margin-top register-btn" type="submit">Reply</button>
+						<a href="./?property=<?php echo $property->getID(); ?>" class="btn btn-default lil-margin-top">Cancel</a>
+					</div>
 				</div>
 
 			</form>
@@ -380,10 +383,9 @@ include "pages/banner.php";
 
 	}
 
-	$bookings = Booking::getAllForConsumer(User::current()->getID());
 	$bookedThisPlace = false;
-	foreach ($bookings as $booking) {
-		if ($booking->getRentalPropertyID() == $property->getID()) {
+	foreach (Booking::getAllForConsumer(User::current()->getID()) as $booking) {
+		if ($booking->getRentalPropertyID() == $property->getID() && $booking->getStatusID() == 2) {
 			$bookedThisPlace = true;
 		}
 	}

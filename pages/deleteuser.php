@@ -23,4 +23,7 @@ if (!User::current()->isAdmin() && $_GET["deleteuser"] != User::current()->getID
 
 $success = $user->delete();
 
-Session::redirect("./?admin");
+if (User::current()->getID() == $user->getID()) {
+	Session::redirect("./?logout");
+}
+Session::redirect("./");
