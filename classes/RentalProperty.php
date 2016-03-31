@@ -134,7 +134,8 @@ class RentalProperty {
 		$districtID = (int) $districtID;
 		$propertyTypeID = (int) $propertyTypeID;
 
-		if ($maxPrice !== false) {
+		if ($maxPrice == false) {
+		} else {
 			if (is_int($maxPrice)) {
 			} else if (is_string($maxPrice) && ctype_digit($maxPrice)) {
 				$maxPrice = (int) $maxPrice;
@@ -144,6 +145,7 @@ class RentalProperty {
 			if ($maxPrice < 0) {
 				throw new InvalidArgumentException("Negative price supplied to RentalProperty::search.");
 			}
+			$maxPrice = (int) $maxPrice;
 		}
 
 		try {
