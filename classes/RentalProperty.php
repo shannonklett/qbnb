@@ -30,7 +30,7 @@ class RentalProperty {
 		if (is_null(self::$cityDistricts)) {
 			self::$cityDistricts = [];
 			$pdo = DB::getHandle();
-			$stmt = $pdo->query("SELECT id, district_name, points_of_interest FROM city_districts");
+			$stmt = $pdo->query("SELECT id, district_name, points_of_interest FROM city_districts ORDER BY district_name ASC");
 			$results = $stmt->fetchAll();
 			if ($results !== false) {
 				foreach ($results as $row) {
@@ -112,6 +112,98 @@ class RentalProperty {
 	}
 
 	/**
+	 * @param int    $districtID
+	 * @param int    $propertyTypeID
+	 * @param string $featureFilter
+	 * @param bool   $maxPrice
+	 *
+	 * @return RentalProperty[]
+	 * @throws ErrorException
+	 */
+	public static function search($districtID = 0, $propertyTypeID = 0, $featureFilter = "", $maxPrice = false) {
+		if (!Validate::int($districtID)) {
+			throw new InvalidArgumentException("Invalid district ID supplied to RentalProperty::search.");
+		}
+		if (!Validate::int($propertyTypeID)) {
+			throw new InvalidArgumentException("Invalid property type ID supplied to RentalProperty::search.");
+		}
+		if (!is_string($featureFilter)) {
+			throw new InvalidArgumentException("Invalid feature string supplied to RentalProperty::search.");
+		}
+		if (!(is_bool($maxPrice) || (is_string($maxPrice) && ctype_digit($maxPrice)))) {}
+		$districtID = (int) $districtID;
+		$propertyTypeID = (int) $propertyTypeID;
+		if ($maxPrice !== false) {
+			if (!is_string($maxPrice) || !ctype_digit($maxPrice)) {
+				throw new InvalidArgumentException("Invalid price value supplied to RentalProperty::search.");
+			}
+			$maxPrice = (int) $maxPrice;
+			if ($maxPrice < 0) {
+				throw new InvalidArgumentException("Negative price supplied to RentalProperty::search.");
+			}
+		}
+
+		try {
+			$pdo  = DB::getHandle();
+			if (!$districtID && !$propertyTypeID && !$featureFilter && $maxPrice === false) {
+				$stmt = $pdo->query("SELECT * FROM rental_properties ORDER BY name ASC");
+			} else {
+				$bindParams = [];
+				$clauses = 0;
+				$query = "SELECT * FROM rental_properties WHERE";
+				if ($districtID) {
+					$query .= " district_id = :district";
+					$bindParams[":district"] = $districtID;
+					$clauses++;
+				}
+				if ($propertyTypeID) {
+					if ($clauses > 0) {
+						$query .= " AND property_type_id = :type";
+					} else {
+						$query .= " property_type_id = :type";
+					}
+					$bindParams[":type"] = $propertyTypeID;
+					$clauses++;
+				}
+				if ($featureFilter) {
+					if ($clauses > 0) {
+						$query .= " AND $featureFilter = 1";
+					} else {
+						$query .= " $featureFilter = 1";
+					}
+					$clauses++;
+				}
+				if ($maxPrice !== false) {
+					if ($clauses > 0) {
+						$query .= " AND price <= :maxprice";
+					} else {
+						$query .= " price <= :maxprice";
+					}
+					$bindParams[":maxprice"] = $maxPrice;
+					$clauses++;
+				}
+				$query .= " ORDER BY name ASC";
+				$stmt = $pdo->prepare($query);
+				foreach ($bindParams as $param => $value) {
+					$stmt->bindParam($param, $value);
+				}
+				$stmt->execute();
+			}
+			$results = $stmt->fetchAll();
+			if ($results === false) {
+				return [];
+			}
+			$properties = [];
+			foreach ($results as $row) {
+				$properties[] = self::withDatabaseRecord($row);
+			}
+			return $properties;
+		} catch (PDOException $e) {
+			throw new ErrorException("Unable to retrieve the search results from the database.");
+		}
+	}
+
+	/**
 	 * @param int $supplierID
 	 *
 	 * @return RentalProperty[]
@@ -123,7 +215,7 @@ class RentalProperty {
 		}
 		try {
 			$pdo  = DB::getHandle();
-			$stmt = $pdo->prepare("SELECT * FROM rental_properties WHERE supplier_id = :supplier_id");
+			$stmt = $pdo->prepare("SELECT * FROM rental_properties WHERE supplier_id = :supplier_id ORDER BY name ASC");
 			$stmt->bindParam(":supplier_id", $supplierID);
 			$stmt->execute();
 			$results = $stmt->fetchAll();
@@ -212,7 +304,7 @@ class RentalProperty {
 		}
 		try {
 			$pdo = DB::getHandle();
-			$stmt = $pdo->prepare("UPDATE rental_properties SET name = :name, supplier_id = :supplier_id, address = :address, district_id = :district_id, property_type_id = :property_type_id, num_guests = :num_guests, num_bathrooms = :num_bathrooms, price = :price, description = :description, has_air_conditioning = :has_air_conditioning, has_cable_tv = :has_cable_tv, has_laundry_machines = :has_laundry_machines, has_parking = :has_parking, has_gym = :has_gym, has_internet = :has_internet, pets_allowed = :pets_allowed, has_wheelchair_access = :has_wheelchair_access, has_pool = :has_pool, has_transport_access = :has_transport_access, has_private_bathroom = :has_private_bathroom WHERE id = :id");
+			$stmt = $pdo->prepare("UPDATE rental_properties SET name = :name, supplier_id = :supplier_id, address = :address, district_id = :district_id, property_type_id = :property_type_id, num_guests = :num_guests, num_rooms = :num_rooms, num_bathrooms = :num_bathrooms, price = :price, description = :description, has_air_conditioning = :has_air_conditioning, has_cable_tv = :has_cable_tv, has_laundry_machines = :has_laundry_machines, has_parking = :has_parking, has_gym = :has_gym, has_internet = :has_internet, pets_allowed = :pets_allowed, has_wheelchair_access = :has_wheelchair_access, has_pool = :has_pool, has_transport_access = :has_transport_access, has_private_bathroom = :has_private_bathroom WHERE id = :id");
 			$stmt->bindParam(":name", $this->name);
 			$stmt->bindParam(":supplier_id", $this->supplierID);
 			$stmt->bindParam(":address", $this->address);

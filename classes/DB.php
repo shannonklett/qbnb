@@ -2,10 +2,10 @@
 
 class DB {
 
-	const DB_HOST = "localhost";
-	const DB_NAME = "blochca_cisc332";
-	const DB_USER = "blochca_cisc332";
-	const DB_PASS = "addyperper";
+	const DB_HOST = "localhost:8889";
+	const DB_NAME = "CISC332Project";
+	const DB_USER = "root";
+	const DB_PASS = "root";
 
 	private static $connection = NULL;
 
