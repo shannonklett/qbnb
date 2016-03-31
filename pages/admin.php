@@ -22,13 +22,15 @@ include "pages/banner.php"; ?>
     <div class="col-md-6 col-md-offset-3">
       <div class="info-property-type">
         <table class="table table-striped">
-          <tbody>
+          <thead>
             <tr>
               <th><strong>First Name</strong></th>
               <th><strong>Last Name</strong></th>
               <th><strong>Email</strong></th>
-              <th><strong>Delete User?</th>
+              <th><strong>Delete User?</strong></th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>First</td>
               <td>Last</td>
