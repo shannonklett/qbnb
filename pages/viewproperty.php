@@ -18,6 +18,72 @@ if (isset($_POST["bookingAddSubmit"])) {
 
 }
 
+if (isset($_POST["reviewAddSubmit"])) {
+
+	$exists = true;
+	try {
+		Review::getSingle(User::current()->getID(), $property->getID());
+	} catch (Exception $e) {
+		$exists = false;
+	}
+
+	if (!$exists) {
+		$review = new Review(User::current()->getID(), $property->getID(), $_POST["optradio"], $_POST["review"], "");
+		$review->insert();
+	}
+
+}
+
+if (isset($_POST["reviewReplySubmit"])) {
+
+	if (User::current()->getID() !== $property->getSupplierID()) {
+		Session::redirect("./?property=" . $property->getID());
+	}
+
+	if (!Validate::int($_GET["reviewreply"])) {
+		Session::redirect("./?property=" . $property->getID());
+	}
+	$review = (int) $_GET["reviewreply"];
+	try {
+		$review = Review::getSingle($review, $property->getID());
+	} catch (Exception $e) {
+		Session::redirect("./?property=" . $property->getID());
+	}
+	$review->setReply($_POST["reply"]);
+	$review->update();
+	Session::redirect("./?property=" . $property->getID());
+
+}
+
+if (isset($_GET["deletereview"])) {
+	if (!Validate::int($_GET["deletereview"])) {
+		Session::redirect("./?property=" . $property->getID());
+	}
+	$review = (int) $_GET["deletereview"];
+	try {
+		$review = Review::getSingle($review, $property->getID());
+	} catch (Exception $e) {
+		Session::redirect("./?property=" . $property->getID());
+	}
+	$review->delete();
+	Session::redirect("./?property=" . $property->getID());
+}
+
+if (isset($_GET["deletereply"])) {
+	if (!Validate::int($_GET["deletereply"])) {
+		Session::redirect("./?property=" . $property->getID());
+	}
+	$review = (int) $_GET["deletereply"];
+	try {
+		$review = Review::getSingle($review, $property->getID());
+	} catch (Exception $e) {
+		Session::redirect("./?property=" . $property->getID());
+	}
+	$review->setReply("");
+	$review->update();
+	Session::redirect("./?property=" . $property->getID());
+}
+
 $features = $property->getFeatures();
 
 include "pages/header.php";
@@ -60,14 +126,14 @@ include "pages/banner.php";
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="info-property-subtitle form-group">
-                <?php echo $property->getAddress(); ?></div>
+                Listed by <?php echo $property->getSupplier()->getFullName(); ?><br><?php echo $property->getAddress(); ?></div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <p class="property-description form-group">
-                <?php echo $property->getDescription(); ?></p>
+                <?php echo nl2br($property->getDescription()); ?></p>
         </div>
     </div>
 
@@ -253,6 +319,110 @@ include "pages/banner.php";
 		</div>
 
 	<?php } ?>
+
+	<div class="small-padding"></div>
+
+	<?php foreach (Review::getAllForProperty($property->getID()) as $review) { ?>
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-primary">
+					<div class=panel-heading>
+						<h3 class="panel-title">(<?php echo $review->getRating() ?>/5) Review by <strong><?php echo $review->getConsumer()->getFirstName(); ?></strong></h3>
+						<?php if (User::current()->getID() == $property->getSupplierID()) { ?>
+							<a class="font-white panel-icon-2" href="./?property=<?php echo $property->getID(); ?>&reviewreply=<?php echo $review->getConsumerID(); ?>"><i class="fa fa-reply"></i></a>
+						<?php }
+						if (User::current()->isAdmin() || User::current()->getID() == $property->getSupplierID() || User::current()->getID() == $review->getConsumerID()) { ?>
+							<a class="font-red panel-icon-1" href="./?property=<?php echo $property->getID(); ?>&deletereview=<?php echo $review->getConsumerID(); ?>"><i class="fa fa-times"></i></a>
+						<?php } ?>
+					</div>
+					<div id="review1">
+						<div class=panel-body>
+							<?php echo nl2br($review->getComment());
+
+							if ($review->getReply()) { ?>
+								<div class="alert alert-info top-pad" role="alert">
+									<?php if (User::current()->isAdmin() || User::current()->getID() == $property->getSupplierID()) { ?>
+										<a class="font-red close" href="./?property=<?php echo $property->getID(); ?>&deletereply=<?php echo $review->getConsumerID(); ?>"><i class="fa fa-times"></i></a>
+									<?php } ?>
+									<strong><?php echo $property->getSupplier()->getFirstName(); ?>:</strong> <?php echo nl2br($review->getReply()); ?></div>
+							<?php } ?>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<?php if (isset($_GET["reviewreply"])) { ?>
+
+			<form action="" method="post">
+
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<label for="commentreview">Reply to <?php echo $review->getConsumer()->getFirstName(); ?></label>
+						<textarea class="form-control" id="commentreview" name="reply" required rows="5"></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<input type="hidden" name="reviewReplySubmit">
+					<div class="col-md-2 col-md-offset-5"><button class="btn lil-margin-top register-btn" type="submit">Reply</button></div>
+				</div>
+
+			</form>
+
+		<?php }
+
+	}
+
+	$bookings = Booking::getAllForConsumer(User::current()->getID());
+	$bookedThisPlace = false;
+	foreach ($bookings as $booking) {
+		if ($booking->getRentalPropertyID() == $property->getID()) {
+			$bookedThisPlace = true;
+		}
+	}
+	$alreadyReviewed = true;
+	try {
+		Review::getSingle(User::current()->getID(), $property->getID());
+	} catch (Exception $e) {
+		$alreadyReviewed = false;
+	}
+
+	if (!isset($_GET["reviewreply"])) {
+
+		if (User::current()->getID() != $property->getSupplierID() && $bookedThisPlace && !$alreadyReviewed) { ?>
+
+			<form action="" method="post">
+
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<label for="commentreview">Write a review</label>
+						<textarea class="form-control" id="commentreview" name="review" required rows="5"></textarea>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3"><strong>Rate Property</strong><br>
+						(worst)&nbsp;&nbsp;&nbsp;
+						<label class="radio-inline"><input type="radio" name="optradio" value="1">1</label>
+						<label class="radio-inline"><input type="radio" name="optradio" value="2">2</label>
+						<label class="radio-inline"><input type="radio" name="optradio" value="3" checked>3</label>
+						<label class="radio-inline"><input type="radio" name="optradio" value="4">4</label>
+						<label class="radio-inline"><input type="radio" name="optradio" value="5">5</label>
+						&nbsp;&nbsp;(best)
+					</div>
+				</div>
+				<div class="row">
+					<input type="hidden" name="reviewAddSubmit">
+					<div class="col-md-2 col-md-offset-5"><button class="btn lil-margin-top register-btn" type="submit">Submit</button></div>
+				</div>
+
+			</form>
+
+		<?php }
+
+	} ?>
 
 </div>
 
