@@ -28,12 +28,15 @@ include "pages/banner.php";
     <div class="col-md-6 col-md-offset-3">
       <img class="info-property-pic" width="100%" src="qbnb_website/images/property_1.jpg">
       <div class="info-property-price">$<?php echo $property->getPrice(); ?>.00</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
       <a class="pencil-icon" href=""><i class="fa fa-pencil"></i></a>
       <a class="remove-icon" href=""><i class="fa fa-times"></i></a>
     </div>
   </div>
-
-  <br>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
