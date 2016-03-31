@@ -387,14 +387,22 @@ input[type="date"]:valid:before {
     height: 200px;
 }
 
+.info-property-subtitle {
+    font-size: 11px;
+}
+
 .info-property-price{
+    position: absolute;
+    bottom: 30px;
     background-image: url('../images/price_tag.png');
     background-repeat: no-repeat;
-    background-size: 124px 28px;
-    padding-left: 5px;
+    background-size: 194px 58px;
+    height: 57px;
+    width: 200px;
+    padding: 11px;
     font-weight: 500;
-    font-size: 18px;
-    color: #fff;
+    font-size: 25px;
+    color: #fff
 }
 
 .property-block {
