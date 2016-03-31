@@ -1,4 +1,26 @@
-<?php if (!isset($_GET[ "property"]) || !Validate::int($_GET[ "property"])) { Session::redirect( "./"); } $property=( int) $_GET[ "property"]; try { $property=R entalProperty::withID($property); } catch (Exception $e) { Session::redirect( "./"); } $features=$ property->getFeatures(); include "pages/header.php"; $bannerText = "Property Details"; include "pages/banner.php"; ?>
+<?php
+
+if (!isset($_GET["property"]) || !Validate::int($_GET["property"])) {
+  Session::redirect("./");
+}
+
+$property = (int) $_GET["property"];
+
+try {
+  $property = RentalProperty::withID($property);
+} catch (Exception $e) {
+  Session::redirect("./");
+}
+
+$features = $property->getFeatures();
+
+include "pages/header.php";
+
+$bannerText = "Property Details";
+
+include "pages/banner.php";
+
+?>
 
 <div class="huge-padding"></div>
 
