@@ -207,7 +207,7 @@ class User {
 	public static function getAll() {
 		try {
 			$pdo  = DB::getHandle();
-			$stmt = $pdo->query("SELECT id, is_admin, first_name, last_name, email, phone_number, grad_year, faculty_id, degree_type_id, gender FROM users ORDER BY first_name ASC, last_name ASC");
+			$stmt = $pdo->query("SELECT id, is_admin, first_name, last_name, email, phone_number, grad_year, faculty_id, degree_type_id, gender FROM users ORDER BY last_name ASC, last_name ASC");
 			$results = $stmt->fetchAll();
 			if ($results === false) {
 				return [];
