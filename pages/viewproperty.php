@@ -31,12 +31,16 @@ include "pages/banner.php";
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <a class="pencil-icon" href=""><i class="fa fa-pencil"></i></a>
-      <a class="remove-icon" href=""><i class="fa fa-times"></i></a>
-    </div>
-  </div>
+<?php if (User::current()->isAdmin() || $property->getSupplierID() == User::current()->getID()) { ?>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<a class="pencil-icon" href="./?property=<?php echo $property->getID(); ?>&edit"><i class="fa fa-pencil"></i></a>
+			<a class="remove-icon" href="./?property=<?php echo $property->getID(); ?>&delete"><i class="fa fa-times"></i></a>
+		</div>
+	</div>
+<?php } else { ?>
+	<div style="height: 1em"></div>
+<?php } ?>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">

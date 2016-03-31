@@ -130,14 +130,17 @@ class RentalProperty {
 		if (!is_string($featureFilter)) {
 			throw new InvalidArgumentException("Invalid feature string supplied to RentalProperty::search.");
 		}
-		if (!(is_bool($maxPrice) || (is_string($maxPrice) && ctype_digit($maxPrice)))) {}
+		
 		$districtID = (int) $districtID;
 		$propertyTypeID = (int) $propertyTypeID;
+
 		if ($maxPrice !== false) {
-			if (!is_string($maxPrice) || !ctype_digit($maxPrice)) {
+			if (is_int($maxPrice)) {
+			} else if (is_string($maxPrice) && ctype_digit($maxPrice)) {
+				$maxPrice = (int) $maxPrice;
+			} else {
 				throw new InvalidArgumentException("Invalid price value supplied to RentalProperty::search.");
 			}
-			$maxPrice = (int) $maxPrice;
 			if ($maxPrice < 0) {
 				throw new InvalidArgumentException("Negative price supplied to RentalProperty::search.");
 			}
